@@ -1,0 +1,72 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/parallels/OS/nachos-3.4-SDU/code/lab7-8'
+ 
+>>> Building dependency file for ../threads/switch-linux.s <<<
+>>> Building dependency file for  ../machine/timer.cc <<<
+ 
+>>> Building dependency file for  ../machine/stats.cc <<<
+ 
+>>> Building dependency file for  ../machine/sysdep.cc <<<
+ 
+>>> Building dependency file for  ../machine/interrupt.cc <<<
+ 
+>>> Building dependency file for  ../threads/synchtest.cc <<<
+ 
+>>> Building dependency file for  ../threads/threadtest.cc <<<
+>>> Building dependency file for  ../threads/utility.cc <<<
+ 
+>>> Building dependency file for  ../threads/thread.cc <<<
+ 
+>>> Building dependency file for  ../threads/system.cc <<<
+ 
+>>> Building dependency file for  ../threads/synchlist.cc <<<
+ 
+>>> Building dependency file for  ../threads/synch.cc <<<
+ 
+>>> Building dependency file for  ../threads/scheduler.cc <<<
+ 
+>>> Building dependency file for  ../threads/list.cc <<<
+ 
+>>> Building dependency file for  ../threads/main.cc <<<
+ 
+echo ">>> Compiling" ../threads/main.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/main.o ../threads/main.cc
+echo ">>> Compiling" ../threads/list.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/list.o ../threads/list.cc
+ 
+echo ">>> Compiling" ../threads/scheduler.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/scheduler.o ../threads/scheduler.cc
+echo ">>> Compiling" ../threads/synch.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/synch.o ../threads/synch.cc
+echo ">>> Compiling" ../threads/synchlist.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/synchlist.o ../threads/synchlist.cc
+echo ">>> Compiling" ../threads/system.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/system.o ../threads/system.cc
+echo ">>> Compiling" ../threads/thread.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/thread.o ../threads/thread.cc
+echo ">>> Compiling" ../threads/utility.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/utility.o ../threads/utility.cc
+ 
+echo ">>> Compiling" ../threads/threadtest.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/threadtest.o ../threads/threadtest.cc
+ 
+echo ">>> Compiling" ../threads/synchtest.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/synchtest.o ../threads/synchtest.cc
+echo ">>> Compiling" ../machine/interrupt.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/interrupt.o ../machine/interrupt.cc
+echo ">>> Compiling" ../machine/sysdep.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/sysdep.o ../machine/sysdep.cc
+echo ">>> Compiling" ../machine/stats.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/stats.o ../machine/stats.cc
+ 
+echo ">>> Compiling" ../machine/timer.cc "<<<"
+g++ -m32 -g -Wall -Wshadow -I../threads -I../machine -DTHREADS -DHOST_i386 -DHOST_LINUX -DCHANGED -c -o arch/unknown-i386-linux/objects/timer.o ../machine/timer.cc
+echo ">>> Assembling" ../threads/switch-linux.s "<<<"
+/lib/cpp  -D HOST_i386 -D HOST_LINUX ../threads/switch-linux.s > arch/unknown-i386-linux/objects/tmp.s
+as --32 -o arch/unknown-i386-linux/objects/switch-linux.o arch/unknown-i386-linux/objects/tmp.s
+rm arch/unknown-i386-linux/objects/tmp.s
+echo ">>> Linking" arch/unknown-i386-linux/bin/nachos "<<<"
+g++ -m32 arch/unknown-i386-linux/objects/main.o arch/unknown-i386-linux/objects/list.o arch/unknown-i386-linux/objects/scheduler.o arch/unknown-i386-linux/objects/synch.o arch/unknown-i386-linux/objects/synchlist.o arch/unknown-i386-linux/objects/system.o arch/unknown-i386-linux/objects/thread.o arch/unknown-i386-linux/objects/utility.o arch/unknown-i386-linux/objects/threadtest.o arch/unknown-i386-linux/objects/synchtest.o arch/unknown-i386-linux/objects/interrupt.o arch/unknown-i386-linux/objects/sysdep.o arch/unknown-i386-linux/objects/stats.o arch/unknown-i386-linux/objects/timer.o arch/unknown-i386-linux/objects/switch-linux.o  -o arch/unknown-i386-linux/bin/nachos		
+ln -sf arch/unknown-i386-linux/bin/nachos nachos
+make: Leaving directory '/home/parallels/OS/nachos-3.4-SDU/code/lab7-8'
+ 

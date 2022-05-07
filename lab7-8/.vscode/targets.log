@@ -1,0 +1,893 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sat Apr 30 21:26:40 2022
+
+# Variables
+
+# makefile (from '../Makefile.common', line 37)
+MAKEFILE_COMMON = yes
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+PAPERSIZE = a4
+# makefile (from '../Makefile.common', line 128)
+s_dfiles = $(SFILES:%.s=$(depends_dir)/%.d)
+# environment
+DESKTOP_SESSION = ubuntu
+# makefile (from '../threads/Makefile.local', line 2)
+MAKEFILE_THREADS_LOCAL = yes
+# makefile (from 'Makefile', line 13)
+MAKEFILE_USERPROG = yes
+# default
+.SHELLFLAGS := -c
+# makefile (from '../Makefile.dep', line 100)
+arch_dir = arch/$(arch)
+# environment
+XDG_SESSION_CLASS = user
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# makefile (from '../Makefile.common', line 70)
+program = $(bin_dir)/nachos
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = ubuntu
+# environment
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/parallels/OS/nachos-3.4-SDU/code/lab7-8
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"2d459c3c1e4312b6770e21efe80cc342.zh-cn","_translationsConfigFile":"/home/parallels/.config/Code/clp/2d459c3c1e4312b6770e21efe80cc342.zh-cn/tcf.json","_cacheRoot":"/home/parallels/.config/Code/clp/2d459c3c1e4312b6770e21efe80cc342.zh-cn","_resolvedLanguagePackCoreLocation":"/home/parallels/.config/Code/clp/2d459c3c1e4312b6770e21efe80cc342.zh-cn/c722ca6c7eed3d7987c0d5c3df5c45f6b15e77d1","_corruptedFile":"/home/parallels/.config/Code/clp/2d459c3c1e4312b6770e21efe80cc342.zh-cn/corrupted.info","_languagePackSupport":true}
+# environment
+_ = /usr/share/code/code
+# makefile (from '../Makefile.common', line 57)
+CFLAGS = -g -Wall -Wshadow $(INCPATH) $(DEFINES) $(HOST) -DCHANGED
+# environment
+JOURNAL_STREAM = 8:44669
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# makefile (from '../Makefile.dep', line 68)
+arch = unknown-i386-linux
+# makefile (from 'arch/unknown-i386-linux/depends/switch-linux.d', line 1)
+MAKEFILE_LIST :=  Makefile ../threads/Makefile.local ../Makefile.dep ../Makefile.common ../Makefile.dep arch/unknown-i386-linux/depends/main.d arch/unknown-i386-linux/depends/list.d arch/unknown-i386-linux/depends/scheduler.d arch/unknown-i386-linux/depends/synch.d arch/unknown-i386-linux/depends/synchlist.d arch/unknown-i386-linux/depends/system.d arch/unknown-i386-linux/depends/thread.d arch/unknown-i386-linux/depends/utility.d arch/unknown-i386-linux/depends/threadtest.d arch/unknown-i386-linux/depends/synchtest.d arch/unknown-i386-linux/depends/interrupt.d arch/unknown-i386-linux/depends/sysdep.d arch/unknown-i386-linux/depends/stats.d arch/unknown-i386-linux/depends/timer.d arch/unknown-i386-linux/depends/switch-linux.d
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# environment
+USERNAME = parallels
+# environment
+MAKELEVEL := 0
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from '../Makefile.dep', line 22)
+AS = as --32
+# makefile (from '../threads/Makefile.local', line 7)
+SFILES = switch$(HOST_LINUX).s
+# makefile (from '../Makefile.dep', line 67)
+CPPFLAGS = $(INCDIR) -D HOST_i386 -D HOST_LINUX
+# environment
+MANAGERPID = 1298
+# makefile (from '../Makefile.common', line 64)
+s_ofiles = $(SFILES:%.s=$(obj_dir)/%.o)
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+LC_NAME = zh_CN.UTF-8
+# makefile (from '../Makefile.dep', line 66)
+CPP = /lib/cpp
+# environment
+VSCODE_CWD = /home/parallels
+# makefile (from '../Makefile.dep', line 103)
+depends_dir = $(arch_dir)/depends
+# makefile (from '../Makefile.common', line 129)
+c_dfiles = $(CFILES:%.c=$(depends_dir)/%.d)
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# makefile (from '../Makefile.dep', line 21)
+LD = g++ -m32
+# makefile (from '../Makefile.common', line 68)
+ofiles = $(cc_ofiles) $(c_ofiles) $(s_ofiles) 
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
+SESSION_MANAGER = local/parallels-Parallels-Virtual-Platform:@/tmp/.ICE-unix/2421,unix/parallels-Parallels-Virtual-Platform:/tmp/.ICE-unix/2421
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+INVOCATION_ID = 616861e3475440b385245e202dbab40b
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = 
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4419
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/parallels/OS/nachos-3.4-SDU/code/lab7-8
+# default
+.LOADED := 
+# environment
+SSH_AGENT_PID = 2380
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/parallels
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# makefile (from '../threads/Makefile.local', line 30)
+DEFINES = -DTHREADS
+# environment
+VSCODE_CODE_CACHE_PATH = /home/parallels/.config/Code/CachedData/c722ca6c7eed3d7987c0d5c3df5c45f6b15e77d1
+# environment
+LOGNAME = parallels
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
++F = $(notdir $+)
+# makefile (from '../Makefile.common', line 65)
+c_ofiles = $(CFILES:%.c=$(obj_dir)/%.o)
+# makefile (from '../Makefile.common', line 132)
+dfiles = $(cc_dfiles) $(c_dfiles) $(s_dfiles) 
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+LC_TIME = zh_CN.UTF-8
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# environment
+SHLVL = 0
+# makefile (from '../Makefile.dep', line 20)
+CC = g++ -m32
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a468728b-8b05-4116-a10d-df43b6078748.sock
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = parallels
+# environment
+LC_MONETARY = zh_CN.UTF-8
+# makefile
+.DEFAULT_GOAL := arch/unknown-i386-linux/bin/nachos
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LC_TELEPHONE = zh_CN.UTF-8
+# default
+MAKE_COMMAND := make
+# makefile (from '../Makefile.dep', line 64)
+HOST_LINUX = -linux
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+LANGUAGE = zh_CN:en
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-ee9caf69-1.65.2-main.sock
+# makefile (from '../threads/Makefile.local', line 13)
+CCFILES = main.cc list.cc scheduler.cc synch.cc synchlist.cc system.cc thread.cc utility.cc threadtest.cc synchtest.cc interrupt.cc sysdep.cc stats.cc timer.cc
+# makefile (from '../Makefile.dep', line 101)
+obj_dir = $(arch_dir)/objects
+# makefile (from '../Makefile.dep', line 102)
+bin_dir = $(arch_dir)/bin
+# makefile
+MAKEFLAGS = pqrR
+# makefile (from '../Makefile.dep', line 24)
+uname = $(shell uname)
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# environment
+LC_PAPER = zh_CN.UTF-8
+# environment
+QT_ACCESSIBILITY = 1
+# makefile (from '../Makefile.common', line 130)
+cc_dfiles = $(CCFILES:%.cc=$(depends_dir)/%.d)
+# makefile (from '../Makefile.dep', line 26)
+mips_arch = dec-mips-ultrix
+# 'override' directive
+.SHELLSTATUS := 0
+# default
+MAKEFILES := 
+# environment
+LC_NUMERIC = zh_CN.UTF-8
+# automatic
+<F = $(notdir $<)
+# environment
+LC_MEASUREMENT = zh_CN.UTF-8
+# environment
+ 
+LC_ALL = C
+ 
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# makefile (from '../threads/Makefile.local', line 28)
+INCPATH = -I../threads -I../machine
+# environment
+WINDOWPATH = 2
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+LC_IDENTIFICATION = zh_CN.UTF-8
+# makefile (from '../Makefile.dep', line 13)
+MAKEFILE_DEP = yes
+# default
+.RECIPEPREFIX := 
+# environment
+LC_ADDRESS = zh_CN.UTF-8
+# environment
+LANG = C
+# environment
+VSCODE_PID = 4419
+# makefile (from '../Makefile.common', line 66)
+cc_ofiles = $(CCFILES:%.cc=$(obj_dir)/%.o)
+# makefile (from '../Makefile.dep', line 65)
+HOST = -DHOST_i386 -DHOST_LINUX
+# variable set hash-table stats:
+# Load=141/1024=14%, Rehash=0, Collisions=40/301=13%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# ../machine (device 2053, inode 2228643): 22 files, no impossibilities.
+# ../vm (device 2053, inode 2228472): 6 files, no impossibilities.
+# . (device 2053, inode 2228491): 12 files, no impossibilities.
+# ../network (device 2053, inode 2228480): 13 files, no impossibilities.
+# ../threads (device 2053, inode 2228485): 29 files, no impossibilities.
+# ../userprog (device 2053, inode 2228467): 14 files, no impossibilities.
+# ../filesys (device 2053, inode 2228494): 19 files, no impossibilities.
+
+# 115 files, no impossibilities in 7 directories.
+
+# Implicit Rules
+
+arch/unknown-i386-linux/bin/%:
+#  recipe to execute (from '../Makefile.common', line 92):
+	@echo ">>> Linking" $@ "<<<"
+	$(LD) $^ $(LDFLAGS) -o $@		
+	ln -sf $@ $(notdir $@)
+
+arch/unknown-i386-linux/objects/%.o: %.cc
+#  recipe to execute (from '../Makefile.common', line 99):
+	@echo ">>> Compiling" $< "<<<"
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+arch/unknown-i386-linux/objects/%.o: %.c
+#  recipe to execute (from '../Makefile.common', line 105):
+	@echo ">>> Compiling" $< "<<<"
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+arch/unknown-i386-linux/objects/%.o: %.s
+#  recipe to execute (from '../Makefile.common', line 115):
+	@echo ">>> Assembling" $< "<<<"
+	$(CPP) $(CPPFLAGS) $< > $(obj_dir)/tmp.s
+	$(AS) -o $@ $(obj_dir)/tmp.s
+	rm $(obj_dir)/tmp.s
+
+arch/unknown-i386-linux/depends/%.d: %.cc
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/depends/%.d: %.c
+#  recipe to execute (from '../Makefile.common', line 145):
+	@echo ">>> Building dependency file for" $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/depends/%.d: %.s
+#  recipe to execute (from '../Makefile.common', line 150):
+	@echo ">>> Building dependency file for" $< "<<<"
+	@$(SHELL) -ec '$(CPP) -MM $(CPPFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# 7 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+arch/unknown-i386-linux/depends/scheduler.d: ../threads/scheduler.cc ../threads/scheduler.cc ../threads/copyright.h ../threads/scheduler.h ../threads/list.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/system.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'scheduler'
+#  Last modified 2022-04-30 21:26:39.677514836
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/depends/list.d: ../threads/list.cc ../threads/list.cc ../threads/copyright.h ../threads/list.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'list'
+#  Last modified 2022-04-30 21:26:39.741518313
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/objects/synchtest.o: ../threads/synchtest.cc ../threads/copyright.h ../threads/system.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h ../threads/synch.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/system.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-11 21:39:02.516576364
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/list.cc:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-02 09:19:23.522512008
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+arch/unknown-i386-linux/depends/main.d: ../threads/main.cc ../threads/main.cc ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/system.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-04-30 21:26:39.83752353
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/objects/thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/thread.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/switch.h ../threads/synch.h ../threads/list.h ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+ 
+
+# Not a target:
+../threads/main.cc:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-04 14:46:14.937553972
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/scheduler.cc:
+#  Implicit rule search has been done.
+#  Last modified 2003-02-06 14:05:10
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h ../threads/thread.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/list.h ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../machine/stats.cc:
+#  Implicit rule search has been done.
+#  Last modified 1995-05-30 03:22:58
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/stats.d: ../machine/stats.cc ../machine/stats.cc ../threads/copyright.h ../threads/utility.h ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h ../machine/stats.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'stats'
+#  Last modified 2022-04-30 21:26:38.249437244
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../threads/thread.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-30 20:15:03.871928255
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../machine/sysdep.cc:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-18 23:57:13.181752428
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/sysdep.d: ../machine/sysdep.cc ../machine/sysdep.cc ../threads/copyright.h ../machine/interrupt.h ../threads/list.h ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/system.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sysdep'
+#  Last modified 2022-04-30 21:26:38.385444633
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../Makefile.dep:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-11 15:05:47.847214404
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/copyright.h:
+#  Implicit rule search has been done.
+#  Last modified 2018-08-17 04:11:42
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/timer.o: ../machine/timer.cc ../threads/copyright.h ../machine/timer.h ../threads/utility.h ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h ../threads/system.h ../threads/utility.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/synch.h:
+#  Implicit rule search has been done.
+#  Last modified 2018-08-17 04:06:16
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-29 15:46:21.996947907
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../machine/timer.h:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-14 12:20:14
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/utility.d: ../threads/utility.cc ../threads/utility.cc ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'utility'
+#  Last modified 2022-04-30 21:26:38.933474409
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/objects/list.o: ../threads/list.cc ../threads/copyright.h ../threads/list.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/switch.h:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-14 12:20:14
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/utility.cc:
+#  Implicit rule search has been done.
+#  Last modified 2018-08-17 03:47:35
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/list.h:
+#  Implicit rule search has been done.
+#  Last modified 2003-02-06 14:29:22
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/thread.d: ../threads/thread.cc ../threads/thread.cc ../threads/copyright.h ../threads/thread.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/switch.h ../threads/synch.h ../threads/list.h ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'thread'
+#  Last modified 2022-04-30 21:26:39.165487016
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/objects/main.o: ../threads/main.cc ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/system.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+arch/unknown-i386-linux/objects/scheduler.o: ../threads/scheduler.cc ../threads/copyright.h ../threads/scheduler.h ../threads/list.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/system.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+arch/unknown-i386-linux/depends/synchlist.d: ../threads/synchlist.cc ../threads/synchlist.cc ../threads/copyright.h ../threads/synchlist.h ../threads/list.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/synch.h ../threads/thread.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'synchlist'
+#  Last modified 2022-04-30 21:26:39.493504838
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../machine/interrupt.cc:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-14 12:20:14
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/interrupt.d: ../machine/interrupt.cc ../machine/interrupt.cc ../threads/copyright.h ../machine/interrupt.h ../threads/list.h ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/system.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'interrupt'
+#  Last modified 2022-04-30 21:26:38.533452675
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/bin/nachos: arch/unknown-i386-linux/objects/main.o arch/unknown-i386-linux/objects/list.o arch/unknown-i386-linux/objects/scheduler.o arch/unknown-i386-linux/objects/synch.o arch/unknown-i386-linux/objects/synchlist.o arch/unknown-i386-linux/objects/system.o arch/unknown-i386-linux/objects/thread.o arch/unknown-i386-linux/objects/utility.o arch/unknown-i386-linux/objects/threadtest.o arch/unknown-i386-linux/objects/synchtest.o arch/unknown-i386-linux/objects/interrupt.o arch/unknown-i386-linux/objects/sysdep.o arch/unknown-i386-linux/objects/stats.o arch/unknown-i386-linux/objects/timer.o arch/unknown-i386-linux/objects/switch-linux.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/synchlist.cc:
+#  Implicit rule search has been done.
+#  Last modified 1995-05-30 03:23:06
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/stats.o: ../machine/stats.cc ../threads/copyright.h ../threads/utility.h ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h ../machine/stats.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/scheduler.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-19 16:23:42.994186875
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/Makefile.local:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-01 19:42:31.688119349
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/sysdep.o: ../machine/sysdep.cc ../threads/copyright.h ../machine/interrupt.h ../threads/list.h ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/system.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+tmpclean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '../Makefile.common', line 184):
+	rm -f tmp*
+
+# Not a target:
+../machine/stats.h:
+#  Implicit rule search has been done.
+#  Last modified 1995-05-30 03:22:56
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/threadtest.d: ../threads/threadtest.cc ../threads/threadtest.cc ../threads/copyright.h ../threads/system.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'threadtest'
+#  Last modified 2022-04-30 21:26:38.72146289
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../machine/sysdep.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-18 23:57:20.305620064
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/threadtest.cc:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-14 12:20:14
+#  File has been updated.
+#  Successfully updated.
+ 
+
+arch/unknown-i386-linux/depends/switch-linux.d: ../threads/switch-linux.s ../threads/switch-linux.s ../threads/copyright.h ../threads/switch.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'switch-linux'
+#  Last modified 2022-04-30 21:26:37.889417683
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 150):
+	@echo ">>> Building dependency file for" $< "<<<"
+	@$(SHELL) -ec '$(CPP) -MM $(CPPFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/depends/system.d: ../threads/system.cc ../threads/system.cc ../threads/copyright.h ../threads/system.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'system'
+#  Last modified 2022-04-30 21:26:39.345496796
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../Makefile.common:
+#  Implicit rule search has been done.
+#  Last modified 2005-08-23 06:49:40
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/utility.o: ../threads/utility.cc ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/system.cc:
+#  Implicit rule search has been done.
+#  Last modified 2004-01-09 03:16:46
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '../Makefile.common', line 179):
+	rm -f `find $(arch_dir) -type f -print | egrep -v '(CVS|cvsignore)'`
+	rm -f nachos coff2noff coff2flat
+	rm -f *.noff *.flat
+
+arch/unknown-i386-linux/depends/synchtest.d: ../threads/synchtest.cc ../threads/synchtest.cc ../threads/copyright.h ../threads/system.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h ../threads/synch.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'synchtest'
+#  Last modified 2022-04-30 21:26:38.665459847
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../threads/utility.h:
+#  Implicit rule search has been done.
+#  Last modified 2018-08-17 03:47:04
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/synchtest.cc:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-15 11:37:24
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/synchlist.o: ../threads/synchlist.cc ../threads/copyright.h ../threads/synchlist.h ../threads/list.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/synch.h ../threads/thread.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+arch/unknown-i386-linux/objects/interrupt.o: ../machine/interrupt.cc ../threads/copyright.h ../machine/interrupt.h ../threads/list.h ../threads/copyright.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/system.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/thread.cc:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-30 20:19:35.145720168
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../machine/interrupt.h:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-14 12:20:14
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/synch.d: ../threads/synch.cc ../threads/synch.cc ../threads/copyright.h ../threads/synch.h ../threads/thread.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/list.h ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'synch'
+#  Last modified 2022-04-30 21:26:39.585509837
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+# Not a target:
+../threads/synchlist.h:
+#  Implicit rule search has been done.
+#  Last modified 1995-05-30 03:23:10
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+ 
+../threads/switch-linux.s:
+#  Implicit rule search has been done.
+#  Last modified 2003-09-03 03:47:20
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+../threads/synch.cc:
+#  Implicit rule search has been done.
+#  Last modified 2022-03-02 09:21:49.511139917
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/objects/threadtest.o: ../threads/threadtest.cc ../threads/copyright.h ../threads/system.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../machine/timer.cc:
+#  Implicit rule search has been done.
+#  Last modified 1997-07-14 12:20:14
+#  File has been updated.
+#  Successfully updated.
+
+arch/unknown-i386-linux/depends/timer.d: ../machine/timer.cc ../machine/timer.cc ../threads/copyright.h ../machine/timer.h ../threads/utility.h ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h ../threads/system.h ../threads/utility.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'timer'
+#  Last modified 2022-04-30 21:26:38.109429636
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '../Makefile.common', line 140):
+	@echo ">>> Building dependency file for " $< "<<<"
+	@$(SHELL) -ec '$(CC) -MM $(CFLAGS) $< \
+	| sed '\''s@$*.o[ ]*:@$(depends_dir)/$(notdir $@) $(obj_dir)/&@g'\'' > $@'
+
+arch/unknown-i386-linux/objects/switch-linux.o: ../threads/switch-linux.s ../threads/copyright.h ../threads/switch.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+arch/unknown-i386-linux/objects/system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h ../threads/utility.h ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h ../threads/thread.h ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h ../threads/list.h ../machine/stats.h ../machine/timer.h ../threads/utility.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+../threads/bool.h:
+#  Implicit rule search has been done.
+#  Last modified 1999-04-14 11:46:16
+#  File has been updated.
+#  Successfully updated.
+
+# files hash-table stats:
+# Load=69/1024=7%, Rehash=0, Collisions=29/620=5%
+# VPATH Search Paths
+
+vpath %.cc ../network:../filesys:../vm:../userprog:../threads:../machine
+vpath %.h ../network:../filesys:../vm:../userprog:../threads:../machine
+vpath %.s ../network:../filesys:../vm:../userprog:../threads:../machine
+
+# 3 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 177 / storage = 3128 B / avg = 17 B
+# current buf: size = 8162 B / used = 3128 B / count = 177 / avg = 17 B
+
+# strcache performance: lookups = 550 / hit rate = 67%
+# hash-table stats:
+# Load=177/8192=2%, Rehash=0, Collisions=14/550=3%
+# Finished Make data base on Sat Apr 30 21:26:40 2022
+
+ 
