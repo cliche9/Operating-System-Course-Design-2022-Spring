@@ -440,7 +440,7 @@ Thread::Join(int pid) {
         currentThread->Sleep();
     }
     // step 4: Joinee执行结束, 获取Joinee的退出码, 在terminatedList中回收Joinee, 继续运行Joiner
-    currentThread->pcb->waitProcessExitCode = thread->getExitCode();
+    currentThread->pcb->waitProcessExitCode = thread->pcb->exitCode;
     scheduler->removeFromTerminatedList(pid);
     interrupt->SetLevel(IntOn);         // 开中断
 }
