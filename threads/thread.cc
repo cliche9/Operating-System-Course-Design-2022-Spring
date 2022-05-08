@@ -438,6 +438,7 @@ Thread::Join(int pid) {
         // 将Joiner加入Waiting队列, 睡眠阻塞Joiner, 引发调度, 调度Joinee运行
         waitingList->Append((void *)this);
         currentThread->Sleep();
+        thread = FindThread(terminatedList, pid);
     }
     // step 4: Joinee执行结束, 获取Joinee的退出码, 在terminatedList中回收Joinee, 继续运行Joiner
     ASSERT(currentThread != NULL);
