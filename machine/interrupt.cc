@@ -73,8 +73,11 @@ Interrupt::Interrupt()
 
 Interrupt::~Interrupt()
 {
-    while (!pending->IsEmpty())
-	delete pending->Remove();
+    printf("~Interrupt\n");
+    while (!pending->IsEmpty()) {
+        printf("delete pending list\n");
+        delete pending->Remove();
+    }
     delete pending;
 }
 
