@@ -262,7 +262,7 @@ List::SortedRemove(int *keyPtr)
     }
     if (keyPtr != NULL)
         *keyPtr = element->key;
-    printf("List: on delete %d\n", ((Thread *)(element->item))->getPid());
+    printf("List: on delete %d\n", element);
     delete element;
     return thing;
 }
