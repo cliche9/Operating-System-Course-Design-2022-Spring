@@ -142,6 +142,7 @@ ExceptionHandler(ExceptionType which)
                 // 返回pid线程的返回码waitProcessExitCode
                 printf("SC_Join: Exit Status = %d\n", currentThread->pcb->waitProcessExitCode);
                 scheduler->Print();
+                machine->WriteRegister(2, currentThread->pcb->waitProcessExitCode);
                 IncrementPC();
                 break;
             }
