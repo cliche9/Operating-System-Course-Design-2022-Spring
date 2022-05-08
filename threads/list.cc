@@ -57,6 +57,7 @@ List::List()
 
 List::~List()
 { 
+    printf("~List\n");
     while (Remove() != NULL)
 	;	 // delete all the list elements
 }
