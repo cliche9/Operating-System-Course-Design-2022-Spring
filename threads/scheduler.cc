@@ -152,9 +152,9 @@ Scheduler::Run (Thread *nextThread)
     
 #ifdef USER_PROGRAM
     if (currentThread->pcb->space != NULL) {		// if there is an address space
-        DEBUG('t', "Restore user program state.\n");
         currentThread->pcb->RestoreUserState();     // to restore, do it.
 	    currentThread->pcb->space->RestoreState();
+        DEBUG('t', "Restore user program state.\n");
     }
 #endif
 }
