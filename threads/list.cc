@@ -78,6 +78,7 @@ void
 List::Append(void *item)
 {
     ListElement *element = new ListElement(item, 0);
+    printf("Append: on append thread %d\n", item);
 
     if (IsEmpty()) {		// list is empty
 	first = element;
@@ -104,6 +105,7 @@ void
 List::Prepend(void *item)
 {
     ListElement *element = new ListElement(item, 0);
+    printf("Prepend: on prepend %d\n", item);
 
     if (IsEmpty()) {		// list is empty
 	first = element;
@@ -153,6 +155,7 @@ List::RemoveByItem(void *item) {
             } else
                 prev->next = cur->next;
         }
+        printf("RemoveByItem: on remove thread %d\n", item);
         delete cur;
     }
 }
@@ -209,6 +212,7 @@ void
 List::SortedInsert(void *item, int sortKey)
 {
     ListElement *element = new ListElement(item, sortKey);
+    printf("SortedInsert: on insert thread %d\n", item);
     ListElement *ptr;		// keep track
 
     if (IsEmpty()) {	// if list is empty, put
@@ -262,7 +266,7 @@ List::SortedRemove(int *keyPtr)
     }
     if (keyPtr != NULL)
         *keyPtr = element->key;
-    printf("List: on delete %d\n", element);
+    printf("SortedRemove: on delete thread %d\n", element->item);
     delete element;
     return thing;
 }
