@@ -154,7 +154,6 @@ Scheduler::Run (Thread *nextThread)
     if (currentThread->pcb->space != NULL) {		// if there is an address space
         currentThread->pcb->RestoreUserState();     // to restore, do it.
 	    currentThread->pcb->space->RestoreState();
-        printf(currentThread->pcb->space);
         currentThread->pcb->space->Print();
         DEBUG('t', "Restore user program state.\n");
     }
