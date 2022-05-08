@@ -44,18 +44,18 @@ Scheduler::Scheduler()
 Scheduler::~Scheduler()
 { 
     delete readyList;
-    printf("deleted readyList\n");
+    DEBUG('t', "deleted readyList\n");
 #ifdef USER_PROGRAM
     if (terminatedList) {
         delete terminatedList;
         terminatedList = NULL;
     }
-    printf("deleted terminatedList\n");
+    DEBUG('t', "deleted terminatedList\n");
     if (waitingList) {
         delete waitingList;
         waitingList = NULL;
     }
-    printf("deleted waitingList\n");
+    DEBUG('t', "deleted waitingList\n");
 #endif
 } 
 

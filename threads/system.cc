@@ -178,31 +178,31 @@ Cleanup()
 {
     printf("\nCleaning up...\n");
 #ifdef NETWORK
-    DEBUG('x', "delete network\n");
+    DEBUG('s', "delete network\n");
     delete postOffice;
 #endif
     
 #ifdef USER_PROGRAM
-    DEBUG('x', "delete machine\n");
+    DEBUG('s', "delete machine\n");
     delete machine;
 #endif
 
 #ifdef FILESYS_NEEDED
-    DEBUG('x', "delete filesys\n");
+    DEBUG('s', "delete filesys\n");
     delete fileSystem;
 #endif
 
 #ifdef FILESYS
-    DEBUG('x', "delete synchDisk\n");
+    DEBUG('s', "delete synchDisk\n");
     delete synchDisk;
 #endif
-    DEBUG('x', "delete timer\n");
+    DEBUG('s', "delete timer\n");
     delete timer;
-    DEBUG('x', "delete scheduler\n");
+    DEBUG('s', "delete scheduler\n");
     delete scheduler;
-    DEBUG('x', "delete interrupt\n");
+    DEBUG('s', "delete interrupt\n");
     delete interrupt;
-    DEBUG('x', "delete all\n");
+    DEBUG('s', "delete all\n");
     
     Exit(0);
 }

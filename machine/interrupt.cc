@@ -73,12 +73,12 @@ Interrupt::Interrupt()
 
 Interrupt::~Interrupt()
 {
-    printf("~Interrupt\n");
+    DEBUG('i', "~Interrupt\n");
     while (!pending->IsEmpty()) {
-        printf("delete pending elements\n");
+        DEBUG('i', "delete pending elements\n");
         delete pending->Remove();
     }
-    printf("delete pending list\n");
+    DEBUG('i', "delete pending list\n");
     delete pending;
 }
 
