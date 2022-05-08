@@ -440,6 +440,10 @@ Thread::Join(int pid) {
         currentThread->Sleep();
     }
     // step 4: Joinee执行结束, 获取Joinee的退出码, 在terminatedList中回收Joinee, 继续运行Joiner
+    ASSERT(currentThread != NULL);
+    ASSERT(thread);
+    ASSERT(currentThread->pcb);
+    ASSERT(thread->pcb);
     currentThread->pcb->waitProcessExitCode = thread->pcb->exitCode;
     scheduler->removeFromTerminatedList(pid);
     interrupt->SetLevel(IntOn);         // 开中断
@@ -464,7 +468,6 @@ Thread::Terminated() {
 
     scheduler->Print();
     scheduler->Run(nextThread);
-    printf("ok?????\n");
     DEBUG('t', "Terminated complete.\n");
 }
 
