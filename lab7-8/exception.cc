@@ -125,7 +125,7 @@ ExceptionHandler(ExceptionType which)
                 // 此处Fork的参数要求为int, 如果要传char *, 要么重载Fork, 要么重载StartProcess, 我们选择简单的重载StartProcess
                 // 还有一种解决思路, 将char *转换成int传递给Fork, 两者均为4字节;
                 thread->Fork(StartProcess, space->getPid());
-                // currentThread->Yield();      // 去掉这个就会报段错误, 为啥呢？
+                currentThread->Yield();      // 去掉这个就会报段错误, 为啥呢？
                 // Exec有返回值, 返回线程号, 返回值存在r2寄存器中
                 machine->WriteRegister(2, space->getPid());
                 // 系统调用返回后直接return, 因此需要在ExceptionHandler中增加PC
