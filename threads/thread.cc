@@ -32,17 +32,11 @@
 //	"threadName" is an arbitrary string, useful for debugging.
 //----------------------------------------------------------------------
 
-Thread::Thread(char* threadName)
-{
+Thread::Thread(char* threadName) {
     name = threadName;
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
-#ifdef USER_PROGRAM
-    space = NULL;
-    parentPid = 0;
-    exitCode = 0;
-#endif
 }
 
 //----------------------------------------------------------------------
@@ -57,21 +51,13 @@ Thread::Thread(char* threadName)
 //      as part of starting up Nachos.
 //----------------------------------------------------------------------
 
-Thread::~Thread()
-{
+Thread::~Thread() {
     DEBUG('t', "Deleting thread \"%s\"\n", name);
-
     ASSERT(this != currentThread);
     if (stack != NULL)
 		DeallocBoundedArray((char *) stack, StackSize * sizeof(_int));
     if (name)
         delete name;
-#ifdef USER_PROGRAM
-    if (this->space) {
-        delete this->space;
-        this->space = NULL;
-    }
-#endif
 }
 
 //----------------------------------------------------------------------
@@ -95,8 +81,7 @@ Thread::~Thread()
 //----------------------------------------------------------------------
 
 void 
-Thread::Fork(VoidFunctionPtr func, _int arg)
-{
+Thread::Fork(VoidFunctionPtr func, _int arg) {
 #ifdef HOST_ALPHA
     DEBUG('t', "Forking thread \"%s\" with func = 0x%lx, arg = %ld\n",
 	  name, (long) func, arg);
@@ -129,8 +114,7 @@ Thread::Fork(VoidFunctionPtr func, _int arg)
 //----------------------------------------------------------------------
 
 void
-Thread::CheckOverflow()
-{
+Thread::CheckOverflow() {
     if (stack != NULL)
 #ifdef HOST_SNAKE			// Stacks grow upward on the Snakes
 	ASSERT((unsigned int)stack[StackSize - 1] == STACK_FENCEPOST);
@@ -156,8 +140,7 @@ Thread::CheckOverflow()
 
 //
 void
-Thread::Finish ()
-{
+Thread::Finish () {
     (void) interrupt->SetLevel(IntOff);		
     ASSERT(this == currentThread);
 #ifdef USER_PROGRAM
@@ -166,9 +149,9 @@ Thread::Finish ()
     // step 2: 
     // 在waitingList中找到Joiner
     // 将其从队列移除, 调度运行Joiner
-    Thread *thread = FindThread(waitingList, this->getParentPid());
+    Thread *thread = FindThread(waitingList, pcb.parentPid);
     if (thread) {
-        thread->waitProcessExitCode = this->exitCode;
+        thread->pcb.waitProcessExitCode = this->exitCode;
         scheduler->ReadyToRun(thread);
         waitingList->RemoveByItem(thread);
     }
@@ -201,8 +184,7 @@ Thread::Finish ()
 //----------------------------------------------------------------------
 
 void
-Thread::Yield ()
-{
+Thread::Yield () {
     Thread *nextThread;
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
     
@@ -238,8 +220,7 @@ Thread::Yield ()
 //	off the ready list, and switching to it.
 //----------------------------------------------------------------------
 void
-Thread::Sleep ()
-{
+Thread::Sleep () {
     Thread *nextThread;
     
     ASSERT(this == currentThread);
@@ -279,8 +260,7 @@ void ThreadPrint(_int arg){ Thread *t = (Thread *)arg; t->Print(); }
 //----------------------------------------------------------------------
 
 void
-Thread::StackAllocate (VoidFunctionPtr func, _int arg)
-{
+Thread::StackAllocate (VoidFunctionPtr func, _int arg) {
     stack = (int *) AllocBoundedArray(StackSize * sizeof(_int));
 
 #ifdef HOST_SNAKE
@@ -388,7 +368,7 @@ Thread::StackAllocate (VoidFunctionPtr func, _int arg)
 #include "machine.h"
 
 //----------------------------------------------------------------------
-// Thread::SaveUserState
+// PCB::SaveUserState
 //	Save the CPU state of a user program on a context switch.
 //
 //	Note that a user program thread has *two* sets of CPU registers -- 
@@ -396,15 +376,30 @@ Thread::StackAllocate (VoidFunctionPtr func, _int arg)
 //	while executing kernel code.  This routine saves the former.
 //----------------------------------------------------------------------
 
+PCB::PCB() {
+    for (int i = 0; i < NumTotalRegs)
+        userRegisters[i] = 0;
+    parentPid = 0;
+    waitProcessExitCode = 0;
+    waitProcessPid = 0;
+    exitCode = 0;
+    space = NULL;
+}
+
+PCB::~PCB() {
+    if (space)
+        delete space;
+    space = NULL;
+}
+
 void
-Thread::SaveUserState()
-{
+PCB::SaveUserState() {
     for (int i = 0; i < NumTotalRegs; i++)
-	userRegisters[i] = machine->ReadRegister(i);
+	    userRegisters[i] = machine->ReadRegister(i);
 }
 
 //----------------------------------------------------------------------
-// Thread::RestoreUserState
+// PCB::RestoreUserState
 //	Restore the CPU state of a user program on a context switch.
 //
 //	Note that a user program thread has *two* sets of CPU registers -- 
@@ -413,10 +408,9 @@ Thread::SaveUserState()
 //----------------------------------------------------------------------
 
 void
-Thread::RestoreUserState()
-{
+PCB::RestoreUserState() {
     for (int i = 0; i < NumTotalRegs; i++)
-	machine->WriteRegister(i, userRegisters[i]);
+	    machine->WriteRegister(i, userRegisters[i]);
 }
 
 void
@@ -424,7 +418,7 @@ Thread::Join(int pid) {
     DEBUG('t', "Thread::Join: Now in thread \"%s\"\n", currentThread->getName());
     IntStatus oldLevel = interrupt->SetLevel(IntOff);       // 关中断
     // step 1: 记录Joinee的pid
-    currentThread->waitingProcessPid = pid;
+    currentThread->pcb.waitProcessPid = pid;
     List *terminatedList = scheduler->getTerminatedList();
     List *waitingList = scheduler->getWaitingList();
     // step 2: 在terminatedList中查找Joinee, 看是否运行结束
@@ -438,7 +432,7 @@ Thread::Join(int pid) {
         currentThread->Sleep();
     }
     // step 4: Joinee执行结束, 获取Joinee的退出码, 在terminatedList中回收Joinee, 继续运行Joiner
-    currentThread->waitProcessExitCode = thread->getExitCode();
+    currentThread.pcb.waitProcessExitCode = thread->getExitCode();
     scheduler->removeFromTerminatedList(pid);
     interrupt->SetLevel(IntOn);         // 开中断
 }
@@ -464,34 +458,39 @@ Thread::Terminated() {
     DEBUG('t', "Terminated complete.\n");
 }
 
+void
+Thread::mapSpace(AddrSpace *space) {
+    pcb.space = space;
+}
+
 int
 Thread::getPid() const {
-    return this->space->getPid();
+    return pcb.space->getPid();
 }
 
 int 
 Thread::getParentPid() const {
-    return this->parentPid;
+    return pcb.parentPid;
 }
 
 void 
 Thread::setParentPid(int pid) {
-    this->parentPid = pid;
+    pcb.parentPid = pid;
 }
 
 int 
 Thread::getExitCode() const {
-    return this->exitCode;
+    return pcb.exitCode;
 }
 
 void
 Thread::setExitCode(int exitCode) {
-    this->exitCode = exitCode;
+    pcb.exitCode = exitCode;
 }
 
 int 
 Thread::getWaitProcessExitCode() const {
-    return this->waitProcessExitCode;
+    return pcb.waitProcessExitCode;
 }
  
 Thread *

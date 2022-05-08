@@ -35,8 +35,8 @@ class AddrSpace {
     int pid;                          // 线程号
     TranslationEntry *pageTable;	    // 用户页表
     unsigned int numPages;		        // 页表表项个数
-    static BitMap *freePageMap;       // 管理物理内存的空闲帧
-    static BitMap *freeUserProcessMap;// 管理空闲用户线程
+    static BitMap freePageMap;        // 管理物理内存的空闲帧
+    static BitMap freeUserProcessMap; // 管理空闲用户线程
 };
 
 #endif // ADDRSPACE_H

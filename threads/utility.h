@@ -98,9 +98,8 @@ extern void DEBUG (char flag, const char* format, ...);  	// Print debug message
     if (!(condition)) {                                                       \
         fprintf(stderr, "Assertion failed: line %d, file \"%s\"\n",           \
                 __LINE__, __FILE__);                                          \
-	fflush(stderr);							      \
+		fflush(stderr);							      						  \
         Abort();                                                              \
     }
-
 
 #endif //UTILITY_H

@@ -75,6 +75,22 @@ extern void ThreadPrint(_int arg);
 //  Some threads also belong to a user address space; threads
 //  that only run in the kernel have a NULL address space.
 
+#ifdef USER_PROGRAM
+struct PCB {
+    int userRegisters[NumTotalRegs];	// 用户态CPU寄存器状态
+    int parentPid;                    // 父线程的pid
+    int waitProcessExitCode;          // Join(pid)线程pid的退出码
+    int waitProcessPid;               // 当前thread等待线程的pid
+    int exitCode;                     // 当前thread的exitCode
+    AddrSpace *space;			            // 用户线程的地址空间
+    
+    PCB();                            // 构造函数
+    ~PCB();                           // 析构函数
+    void SaveUserState();		          // 保存用户寄存器内容
+    void RestoreUserState();		      // 恢复用户寄存器
+};
+#endif
+
 class Thread {
   private:
     // NOTE: DO NOT CHANGE the order of these first two members.
@@ -110,18 +126,11 @@ class Thread {
 // one for its state while executing user code, one for its state 
 // while executing kernel code.
 
-    int userRegisters[NumTotalRegs];	// 用户态CPU寄存器状态
-    int parentPid;                    // 父线程的pid
-    int waitProcessExitCode;          // Join(pid)线程pid的退出码
-    int waitingProcessPid;            // 当前thread等待线程的pid
-    int exitCode;                     // 当前thread的exitCode
-
   public:
-    AddrSpace *space;			            // 用户线程的地址空间
-    void SaveUserState();		          // 保存用户寄存器内容
-    void RestoreUserState();		      // 恢复用户寄存器
     void Join(int pid);               // 系统调用Join: 阻塞当前线程, 执行pid线程, pid执行完毕后回收其资源, 重新运行当前线程
     void Terminated();                // 线程终止收尾操作
+    
+    void mapSpace(AddrSpace *space);  // 映射用户线程
     int getPid() const;               // 获取线程号pid
     int getParentPid() const;         // 获取父线程线程号pid
     void setParentPid(int pid);       // 设置父线程线程号
@@ -129,6 +138,7 @@ class Thread {
     void setExitCode(int exitCode);   // 设置exitCode
     int getWaitProcessExitCode() const; // 获取waitingProcess的exitCode
   private:
+    PCB pcb;                          // 用户进程的相关变量
     Thread *FindThread(List *list, int pid);   // 从list中寻找线程号为pid的线程
 #endif
 };

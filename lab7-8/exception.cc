@@ -67,12 +67,16 @@ ExceptionHandler(ExceptionType which)
                 DEBUG('a', "Exit, initiated by user program.\n");
                 printf("SC_Exit: system call\n");
                 scheduler->Print();
-                int exitCode = machine->ReadRegister(4);    // 读取Exit的退出码
+                // 读取Exit的退出码
+                int exitCode = machine->ReadRegister(4);    
                 printf("SC_Exit: Exit Status = %d\n", exitCode);
-                machine->WriteRegister(2, exitCode);        // 将退出码作为返回值保存在r2, 以备Join使用
+                // 将退出码作为返回值保存在r2, 以备Join使用
+                machine->WriteRegister(2, exitCode);
                 DEBUG('a', "Write exitCode back to r2\n");
+                // 设置thread的退出码
                 currentThread->setExitCode(exitCode);
-                if (currentThread->getParentPid() < 100) {
+                // 处理非Fork线程
+                if (currentThread->pcb.parentPid < 100) {
                     scheduler->emptyList(scheduler->getTerminatedList());
                     DEBUG('a', "Non-Forked Thread, empty terminated list.\n");
                 }
@@ -87,7 +91,8 @@ ExceptionHandler(ExceptionType which)
                 DEBUG('a', "Exec, initiated by user program.\n");
                 printf("SC_Exec: system call\n");
                 scheduler->Print();
-   	            int addr = machine->ReadRegister(4);        // 获得exec程序中Exec系统调用函数的参数
+                // 获得exec程序中Exec系统调用函数的参数
+   	            int addr = machine->ReadRegister(4);        
                 printf("SC_Exec: Successfully read register 4\n");
                 // 由于此处参数是字符串, r4寄存器存储该字符串在内存中的地址, 因此需要访存读出
                 // char fileName[FileNameMaxLen + 1];   Nachos中的文件长度应该限制在FileNameMaxLen, 此处为了适应unix文件系统, 直接使用50作为长度
@@ -108,15 +113,17 @@ ExceptionHandler(ExceptionType which)
                 AddrSpace *space = new AddrSpace(executable);
                 delete executable;
                 // 新建Thread类即线程管理类, Fork运行子线程
-                char *forkedThreadName = fileName;
-                printf("SC_Exec: Forked thread name is %s.\n", forkedThreadName);
-                Thread *thread = new Thread(forkedThreadName);
+                printf("SC_Exec: Forked thread name is %s.\n", fileName);
+                Thread *thread = new Thread(fileName);
                 // 将用户线程映射为核心线程
-                thread->space = space;
+                thread->mapSpace(space);
                 printf("SC_Exec: parentPid = %d\n", currentThread->getPid());
-                thread->setParentPid(currentThread->getPid());      // 设置新建线程的parentPid = 当前线程的pid
-                space->Print();             // 输出该进程的页表信息, for debugging
+                // 设置新建线程的parentPid = 当前线程的pid
+                thread->pcb.parentPid = currentThread->getPid();
+                // 输出该进程的页表信息, for debugging
+                space->Print();
                 // 此处Fork的参数要求为int, 如果要传char *, 要么重载Fork, 要么重载StartProcess, 我们选择简单的重载StartProcess
+                // 还有一种解决思路, 将char *转换成int传递给Fork, 两者均为4字节;
                 thread->Fork(StartProcess, space->getPid());
                 // currentThread->Yield();      // 去掉这个就会报段错误, 为啥呢？
                 // Exec有返回值, 返回线程号, 返回值存在r2寄存器中

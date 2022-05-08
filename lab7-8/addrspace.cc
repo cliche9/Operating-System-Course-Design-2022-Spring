@@ -57,13 +57,13 @@ SwapHeader (NoffHeader *noffH)
 //	"executable" is the file containing the object code to load into memory
 //----------------------------------------------------------------------
 
-BitMap *AddrSpace::freePageMap = new BitMap(NumPhysPages);
-BitMap *AddrSpace::freeUserProcessMap = new BitMap(MaxUserProcess);
+BitMap AddrSpace::freePageMap(NumPhysPages);
+BitMap AddrSpace::freeUserProcessMap(MaxUserProcess);
 
 AddrSpace::AddrSpace(OpenFile *executable) {
     // 分配线程号
-    ASSERT(freeUserProcessMap->NumClear() >= 1);
-    pid = freeUserProcessMap->Find() + 100;                 // 0~99保留给核心进程
+    ASSERT(freeUserProcessMap.NumClear() >= 1);
+    pid = freeUserProcessMap.Find() + 100;                 // 0~99保留给核心进程
     
     NoffHeader noffH;
     unsigned int i, size;
@@ -91,10 +91,10 @@ AddrSpace::AddrSpace(OpenFile *executable) {
 					numPages, size);
     // step1：创建用户页表, 建立虚拟页-实际帧映射
     pageTable = new TranslationEntry[numPages];
-    ASSERT(freePageMap->NumClear() >= numPages);            // 确定内存空闲帧足以分配给该程序
+    ASSERT(freePageMap.NumClear() >= numPages);            // 确定内存空闲帧足以分配给该程序
     for (i = 0; i < numPages; i++) {
         pageTable[i].virtualPage = i;
-        pageTable[i].physicalPage = freePageMap->Find();    // 修改virt - phys的映射, 寻找空闲物理帧作为映射
+        pageTable[i].physicalPage = freePageMap.Find();    // 修改virt - phys的映射, 寻找空闲物理帧作为映射
         pageTable[i].valid = TRUE;
         pageTable[i].use = FALSE;
         pageTable[i].dirty = FALSE;
@@ -130,9 +130,9 @@ AddrSpace::AddrSpace(OpenFile *executable) {
 //----------------------------------------------------------------------
 
 AddrSpace::~AddrSpace() {
-    freeUserProcessMap->Clear(pid);
+    freeUserProcessMap.Clear(pid);
     for (int i = 0; i < numPages; i++)
-        freePageMap->Clear(pageTable[i].physicalPage);
+        freePageMap.Clear(pageTable[i].physicalPage);
     delete [] pageTable;
 }
 
@@ -152,7 +152,7 @@ AddrSpace::InitRegisters()
     int i;
 
     for (i = 0; i < NumTotalRegs; i++)
-	machine->WriteRegister(i, 0);
+	    machine->WriteRegister(i, 0);
 
     // Initial program counter -- must be location of "Start"
     machine->WriteRegister(PCReg, 0);	
@@ -161,9 +161,9 @@ AddrSpace::InitRegisters()
     // of branch delay possibility
     machine->WriteRegister(NextPCReg, 4);
 
-   // Set the stack register to the end of the address space, where we
-   // allocated the stack; but subtract off a bit, to make sure we don't
-   // accidentally reference off the end!
+    // Set the stack register to the end of the address space, where we
+    // allocated the stack; but subtract off a bit, to make sure we don't
+    // accidentally reference off the end!
     machine->WriteRegister(StackReg, numPages * PageSize - 16);
     DEBUG('a', "Initializing stack register to %d\n", numPages * PageSize - 16);
 }

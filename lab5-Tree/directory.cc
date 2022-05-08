@@ -97,10 +97,8 @@ void
 Directory::WriteBack(OpenFile *file)
 {
     char size[4];
-    for (int i = 0; i < 3; i++) {
-        size[i] = char(tableSize);
-        tableSize >>= 8;
-    }
+    for (int i = 0; i < 3; i++)
+        size[i] = char(tableSize >> (8 * i));
     size[4] = '\0';
     
     (void) file->WriteAt(size, sizeof(int), 0);
