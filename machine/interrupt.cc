@@ -78,7 +78,7 @@ Interrupt::~Interrupt()
         printf("delete pending elements\n");
         delete pending->Remove();
     }
-    printf("delete pending list\n")
+    printf("delete pending list\n");
     delete pending;
 }
 
