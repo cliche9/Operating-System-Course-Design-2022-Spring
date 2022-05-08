@@ -159,7 +159,7 @@ Thread::Finish () {
     // 将其从队列移除, 调度运行Joiner
     Thread *thread = FindThread(waitingList, pcb->parentPid);
     if (thread) {
-        thread->pcb->waitProcessExitCode = this->exitCode;
+        thread->pcb->waitProcessExitCode = this->pcb->exitCode;
         scheduler->ReadyToRun(thread);
         waitingList->RemoveByItem(thread);
     }
@@ -385,7 +385,7 @@ Thread::StackAllocate (VoidFunctionPtr func, _int arg) {
 //----------------------------------------------------------------------
 
 PCB::PCB() {
-    for (int i = 0; i < NumTotalRegs)
+    for (int i = 0; i < NumTotalRegs; i++)
         userRegisters[i] = 0;
     parentPid = 0;
     waitProcessExitCode = 0;
@@ -440,7 +440,7 @@ Thread::Join(int pid) {
         currentThread->Sleep();
     }
     // step 4: Joinee执行结束, 获取Joinee的退出码, 在terminatedList中回收Joinee, 继续运行Joiner
-    currentThread.pcb->waitProcessExitCode = thread->getExitCode();
+    currentThread->pcb->waitProcessExitCode = thread->getExitCode();
     scheduler->removeFromTerminatedList(pid);
     interrupt->SetLevel(IntOn);         // 开中断
 }
