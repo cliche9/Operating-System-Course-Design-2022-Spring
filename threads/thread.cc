@@ -462,6 +462,7 @@ Thread::Terminated() {
     while ((nextThread = scheduler->FindNextToRun()) == NULL)
         interrupt->Idle();
 
+    scheduler->Print();
     scheduler->Run(nextThread);
     DEBUG('t', "Terminated complete.\n");
 }
