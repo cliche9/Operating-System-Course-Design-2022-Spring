@@ -463,7 +463,6 @@ Thread::Terminated() {
     while ((nextThread = scheduler->FindNextToRun()) == NULL)
         interrupt->Idle();
 
-    scheduler->Print();
     scheduler->Run(nextThread);
     DEBUG('t', "Terminated complete.\n");       // 位于Run函数后面的指令都不会运行, 因为切换上下文了
 }
