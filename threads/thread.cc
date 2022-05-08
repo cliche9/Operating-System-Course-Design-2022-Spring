@@ -466,39 +466,14 @@ Thread::Terminated() {
     DEBUG('t', "Terminated complete.\n");
 }
 
-void
-Thread::mapSpace(AddrSpace *space) {
-    pcb->space = space;
-}
-
-int
+int 
 Thread::getPid() const {
     return pcb->space->getPid();
 }
 
-int 
-Thread::getParentPid() const {
-    return pcb->parentPid;
-}
-
-void 
-Thread::setParentPid(int pid) {
-    pcb->parentPid = pid;
-}
-
-int 
-Thread::getExitCode() const {
-    return pcb->exitCode;
-}
-
-void
-Thread::setExitCode(int exitCode) {
-    pcb->exitCode = exitCode;
-}
-
-int 
-Thread::getWaitProcessExitCode() const {
-    return pcb->waitProcessExitCode;
+PCB *
+Thread::getPCB() const {
+    return this->pcb;
 }
  
 Thread *

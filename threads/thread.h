@@ -131,12 +131,8 @@ class Thread {
     void Terminated();                // 线程终止收尾操作
     
     void mapSpace(AddrSpace *space);  // 映射用户线程
-    int getPid() const;               // 获取线程号pid
-    int getParentPid() const;         // 获取父线程线程号pid
-    void setParentPid(int pid);       // 设置父线程线程号
-    int getExitCode() const;          // 获取exitCode
-    void setExitCode(int exitCode);   // 设置exitCode
-    int getWaitProcessExitCode() const; // 获取waitingProcess的exitCode
+    int getPid() const;               // 获取Pid
+    PCB *getPCB() const;              // 获取PCB
   private:
     PCB *pcb;                         // 用户进程的相关变量
     Thread *FindThread(List *list, int pid);   // 从list中寻找线程号为pid的线程
