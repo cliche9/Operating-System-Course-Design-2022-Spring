@@ -130,11 +130,9 @@ class Thread {
     void Join(int pid);               // 系统调用Join: 阻塞当前线程, 执行pid线程, pid执行完毕后回收其资源, 重新运行当前线程
     void Terminated();                // 线程终止收尾操作
     
-    void mapSpace(AddrSpace *space);  // 映射用户线程
     int getPid() const;               // 获取Pid
-    PCB *getPCB() const;              // 获取PCB
-  private:
     PCB *pcb;                         // 用户进程的相关变量
+  private:
     Thread *FindThread(List *list, int pid);   // 从list中寻找线程号为pid的线程
     friend class Scheduler;
 #endif

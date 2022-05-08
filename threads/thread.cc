@@ -470,11 +470,6 @@ int
 Thread::getPid() const {
     return pcb->space->getPid();
 }
-
-PCB *
-Thread::getPCB() const {
-    return this->pcb;
-}
  
 Thread *
 Thread::FindThread(List *list, int pid) {
