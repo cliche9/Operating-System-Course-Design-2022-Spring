@@ -59,12 +59,12 @@ ExceptionHandler(ExceptionType which)
         // 处理system call exception
         switch (type) {
             case SC_Halt: {
-                DEBUG('a', "Shutdown, initiated by user program.\n");
+                DEBUG('x', "Shutdown, initiated by user program.\n");
    	            interrupt->Halt();
                 break;
             }
             case SC_Exit: {
-                DEBUG('a', "Exit, initiated by user program.\n");
+                DEBUG('x', "Exit, initiated by user program.\n");
                 printf("SC_Exit: system call\n");
                 scheduler->Print();
                 // 读取Exit的退出码
@@ -72,13 +72,13 @@ ExceptionHandler(ExceptionType which)
                 printf("SC_Exit: Exit Status = %d\n", exitCode);
                 // 将退出码作为返回值保存在r2, 以备Join使用
                 machine->WriteRegister(2, exitCode);
-                DEBUG('a', "Write exitCode back to r2\n");
+                DEBUG('x', "Write exitCode back to r2\n");
                 // 设置thread的退出码
                 currentThread->pcb->exitCode = exitCode;
                 // 处理非Fork线程
                 if (currentThread->pcb->parentPid < 100) {
                     scheduler->emptyList(scheduler->getTerminatedList());
-                    DEBUG('a', "Non-Forked Thread, empty terminated list.\n");
+                    DEBUG('x', "Non-Forked Thread, empty terminated list.\n");
                 }
                 // 释放该线程的地址空间和pid
                 currentThread->Finish();
@@ -88,7 +88,7 @@ ExceptionHandler(ExceptionType which)
                 break;
             }
             case SC_Exec: {
-                DEBUG('a', "Exec, initiated by user program.\n");
+                DEBUG('x', "Exec, initiated by user program.\n");
                 printf("SC_Exec: system call\n");
                 scheduler->Print();
                 // 获得exec程序中Exec系统调用函数的参数
@@ -98,7 +98,7 @@ ExceptionHandler(ExceptionType which)
                 // char fileName[FileNameMaxLen + 1];   Nachos中的文件长度应该限制在FileNameMaxLen, 此处为了适应unix文件系统, 直接使用50作为长度
                 char *fileName = new char[64];
                 int i = 0;
-                DEBUG('m', "Exec, about to read filename\n");
+                DEBUG('x', "Exec, about to read filename\n");
                 do {
                     // 循环读取, 一次读1字节, 直到读到结尾符'\0'
                     machine->ReadMem(addr + i, 1, (int *)&fileName[i]);
@@ -134,7 +134,7 @@ ExceptionHandler(ExceptionType which)
                 break;
             }
             case SC_Join: {
-                DEBUG('a', "Join, initiated by user program.\n");
+                DEBUG('x', "Join, initiated by user program.\n");
                 printf("SC_Join: system call\n");
                 scheduler->Print();
                 int pid = machine->ReadRegister(4);     // 读取pid
@@ -146,7 +146,7 @@ ExceptionHandler(ExceptionType which)
                 break;
             }
             case SC_Yield: {
-                DEBUG('a', "Yield, initiated by user program.\n");
+                DEBUG('x', "Yield, initiated by user program.\n");
                 printf("SC_Yield: system call\n");
                 currentThread->Yield();
                 IncrementPC();

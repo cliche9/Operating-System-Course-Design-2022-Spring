@@ -190,6 +190,7 @@ Scheduler::removeFromTerminatedList(int pid) {
 void
 Scheduler::emptyList(List *list) {
     delete list;
+    list = NULL;
 }
 
 List *
