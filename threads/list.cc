@@ -137,6 +137,7 @@ List::RemoveByItem(void *item) {
         prev = cur;
         cur = cur->next;
     }
+    ASSERT(cur != NULL);
     if (cur) {
         if (first == last) {
             first = NULL;

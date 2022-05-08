@@ -28,16 +28,19 @@ class Scheduler {
     void Run(Thread* nextThread);	// Cause nextThread to start running
     void Print();			// Print contents of ready list
     
+  private:
+    List *readyList;  		// queue of threads that are ready to run,
+				// but not running
+#ifdef USER_PROGRAM
+    List *waitingList;    // Join产生的陷入阻塞的线程队列
+    List *terminatedList; // Join等操作产生的执行结束的线程队列
+
+public:
     void removeFromTerminatedList(int pid);   // 从terminatedList中删除线程pid
     void emptyList(List *list);               // 清空队列
     List *getTerminatedList() const;
     List *getWaitingList() const;
-    
-  private:
-    List *readyList;  		// queue of threads that are ready to run,
-				// but not running
-    List *waitingList;    // Join产生的陷入阻塞的线程队列
-    List *terminatedList; // Join等操作产生的执行结束的线程队列
+#endif
 };
 
 #endif // SCHEDULER_H

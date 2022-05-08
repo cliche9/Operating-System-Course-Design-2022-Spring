@@ -168,6 +168,8 @@ Scheduler::Print()
     printf("\n=============================================================\n\n\n");
 }
 
+
+#ifdef USER_PROGRAM
 void
 Scheduler::removeFromTerminatedList(int pid) {
     ListElement *cur = terminatedList->getFirst();
@@ -196,3 +198,4 @@ List *
 Scheduler::getWaitingList() const {
     return this->waitingList;
 }
+#endif
