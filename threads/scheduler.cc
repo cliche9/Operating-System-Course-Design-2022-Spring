@@ -43,12 +43,18 @@ Scheduler::Scheduler()
 
 Scheduler::~Scheduler()
 { 
-    delete readyList; 
+    delete readyList;
     printf("deleted readyList\n");
 #ifdef USER_PROGRAM
-    delete terminatedList;
+    if (terminatedList) {
+        delete terminatedList;
+        terminatedList = NULL;
+    }
     printf("deleted terminatedList\n");
-    delete waitingList;
+    if (waitingList) {
+        delete waitingList;
+        waitingList = NULL;
+    }
     printf("deleted waitingList\n");
 #endif
 } 
@@ -189,8 +195,7 @@ Scheduler::removeFromTerminatedList(int pid) {
 
 void
 Scheduler::emptyList(List *list) {
-    delete list;
-    list = NULL;
+    while (list->Remove() != NULL);	 // delete all the list elements
 }
 
 List *
