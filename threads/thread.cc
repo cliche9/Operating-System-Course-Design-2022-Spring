@@ -464,6 +464,7 @@ Thread::Terminated() {
 
     scheduler->Print();
     scheduler->Run(nextThread);
+    printf("ok?????\n");
     DEBUG('t', "Terminated complete.\n");
 }
 
