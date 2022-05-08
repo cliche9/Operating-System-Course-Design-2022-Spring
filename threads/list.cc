@@ -138,8 +138,10 @@ List::RemoveByItem(void *item) {
         cur = cur->next;
     }
     if (cur) {
-        if (first == last)
-            first = last = NULL;
+        if (first == last) {
+            first = NULL;
+            last = NULL;
+        }
         else {
             if (prev == NULL)
                 first = first->next;
