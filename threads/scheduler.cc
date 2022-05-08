@@ -101,7 +101,7 @@ Scheduler::Run (Thread *nextThread)
     Thread *oldThread = currentThread;
     
 #ifdef USER_PROGRAM			// ignore until running user programs 
-    if (currentThread->pcb != NULL) {	// if this thread is a user program,
+    if (currentThread->pcb->space != NULL) {	// if this thread is a user program,
         DEBUG('t', "Save user program state.\n");
         currentThread->pcb->SaveUserState(); // save the user's CPU registers
 	    currentThread->pcb->space->SaveState();
@@ -117,7 +117,7 @@ Scheduler::Run (Thread *nextThread)
     DEBUG('t', "Switching from thread \"%s\" to thread \"%s\".\n",
 	  oldThread->getName(), nextThread->getName());
 #ifdef USER_PROGRAM
-    if (oldThread->pcb && nextThread->pcb)
+    if (oldThread->pcb->space && nextThread->pcb->space)
         DEBUG('t', "Switching from thread (pid = %d) to thread (pid = %d).\n", 
             oldThread->getPid(), nextThread->getPid());
 #endif
@@ -142,7 +142,7 @@ Scheduler::Run (Thread *nextThread)
     }
     
 #ifdef USER_PROGRAM
-    if (currentThread->pcb != NULL) {		// if there is an address space
+    if (currentThread->pcb->space != NULL) {		// if there is an address space
         DEBUG('t', "Restore user program state.\n");
         currentThread->pcb->RestoreUserState();     // to restore, do it.
 	    currentThread->pcb->space->RestoreState();
