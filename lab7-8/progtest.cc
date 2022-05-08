@@ -31,7 +31,7 @@ StartProcess(char *filename)
 	return;
     }
     space = new AddrSpace(executable);    
-    currentThread->space = space;
+    currentThread->pcb->space = space;
     delete executable;			// close file
     space->Print();             // 输出该进程的页表信息, for debugging
 
