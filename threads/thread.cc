@@ -37,6 +37,9 @@ Thread::Thread(char* threadName) {
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
+#ifdef USER_PROGRAM
+    pcb = new PCB();
+#endif
 }
 
 //----------------------------------------------------------------------
@@ -58,6 +61,11 @@ Thread::~Thread() {
 		DeallocBoundedArray((char *) stack, StackSize * sizeof(_int));
     if (name)
         delete name;
+#ifdef USER_PROGRAM
+    if (pcb)
+        delete pcb;
+    pcb = NULL;
+#endif
 }
 
 //----------------------------------------------------------------------
@@ -149,9 +157,9 @@ Thread::Finish () {
     // step 2: 
     // 在waitingList中找到Joiner
     // 将其从队列移除, 调度运行Joiner
-    Thread *thread = FindThread(waitingList, pcb.parentPid);
+    Thread *thread = FindThread(waitingList, pcb->parentPid);
     if (thread) {
-        thread->pcb.waitProcessExitCode = this->exitCode;
+        thread->pcb->waitProcessExitCode = this->exitCode;
         scheduler->ReadyToRun(thread);
         waitingList->RemoveByItem(thread);
     }
@@ -418,7 +426,7 @@ Thread::Join(int pid) {
     DEBUG('t', "Thread::Join: Now in thread \"%s\"\n", currentThread->getName());
     IntStatus oldLevel = interrupt->SetLevel(IntOff);       // 关中断
     // step 1: 记录Joinee的pid
-    currentThread->pcb.waitProcessPid = pid;
+    currentThread->pcb->waitProcessPid = pid;
     List *terminatedList = scheduler->getTerminatedList();
     List *waitingList = scheduler->getWaitingList();
     // step 2: 在terminatedList中查找Joinee, 看是否运行结束
@@ -432,7 +440,7 @@ Thread::Join(int pid) {
         currentThread->Sleep();
     }
     // step 4: Joinee执行结束, 获取Joinee的退出码, 在terminatedList中回收Joinee, 继续运行Joiner
-    currentThread.pcb.waitProcessExitCode = thread->getExitCode();
+    currentThread.pcb->waitProcessExitCode = thread->getExitCode();
     scheduler->removeFromTerminatedList(pid);
     interrupt->SetLevel(IntOn);         // 开中断
 }
@@ -460,37 +468,37 @@ Thread::Terminated() {
 
 void
 Thread::mapSpace(AddrSpace *space) {
-    pcb.space = space;
+    pcb->space = space;
 }
 
 int
 Thread::getPid() const {
-    return pcb.space->getPid();
+    return pcb->space->getPid();
 }
 
 int 
 Thread::getParentPid() const {
-    return pcb.parentPid;
+    return pcb->parentPid;
 }
 
 void 
 Thread::setParentPid(int pid) {
-    pcb.parentPid = pid;
+    pcb->parentPid = pid;
 }
 
 int 
 Thread::getExitCode() const {
-    return pcb.exitCode;
+    return pcb->exitCode;
 }
 
 void
 Thread::setExitCode(int exitCode) {
-    pcb.exitCode = exitCode;
+    pcb->exitCode = exitCode;
 }
 
 int 
 Thread::getWaitProcessExitCode() const {
-    return pcb.waitProcessExitCode;
+    return pcb->waitProcessExitCode;
 }
  
 Thread *

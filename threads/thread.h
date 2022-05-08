@@ -138,7 +138,7 @@ class Thread {
     void setExitCode(int exitCode);   // 设置exitCode
     int getWaitProcessExitCode() const; // 获取waitingProcess的exitCode
   private:
-    PCB pcb;                          // 用户进程的相关变量
+    PCB *pcb;                         // 用户进程的相关变量
     Thread *FindThread(List *list, int pid);   // 从list中寻找线程号为pid的线程
     friend class Scheduler;
 #endif

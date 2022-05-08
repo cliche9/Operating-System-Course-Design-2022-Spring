@@ -76,7 +76,7 @@ ExceptionHandler(ExceptionType which)
                 // 设置thread的退出码
                 currentThread->setExitCode(exitCode);
                 // 处理非Fork线程
-                if (currentThread->pcb.parentPid < 100) {
+                if (currentThread->pcb->parentPid < 100) {
                     scheduler->emptyList(scheduler->getTerminatedList());
                     DEBUG('a', "Non-Forked Thread, empty terminated list.\n");
                 }
@@ -119,7 +119,7 @@ ExceptionHandler(ExceptionType which)
                 thread->mapSpace(space);
                 printf("SC_Exec: parentPid = %d\n", currentThread->getPid());
                 // 设置新建线程的parentPid = 当前线程的pid
-                thread->pcb.parentPid = currentThread->getPid();
+                thread->pcb->parentPid = currentThread->getPid();
                 // 输出该进程的页表信息, for debugging
                 space->Print();
                 // 此处Fork的参数要求为int, 如果要传char *, 要么重载Fork, 要么重载StartProcess, 我们选择简单的重载StartProcess
