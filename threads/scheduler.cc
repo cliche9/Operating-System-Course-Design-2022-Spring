@@ -159,11 +159,11 @@ void
 Scheduler::Print()
 {
     printf("=======================Scheduler Queue=========================\n");
-    printf("Ready list contents:\n");
+    printf("Ready list contents: ");
     readyList->Mapcar((VoidFunctionPtr) ThreadPrint);
-    printf("\nWaiting list contents:\n");
+    printf("\nWaiting list contents: ");
     waitingList->Mapcar((VoidFunctionPtr) ThreadPrint);
-    printf("\nTerminated list contents:\n");
+    printf("\nTerminated list contents: ");
     terminatedList->Mapcar((VoidFunctionPtr) ThreadPrint);
     printf("\n=============================================================\n\n\n");
 }
