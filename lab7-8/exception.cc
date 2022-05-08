@@ -186,6 +186,6 @@ IncrementPC() {
     printf("Increment PC --- initiated by user program.\n");
     // machine中的registers是私有的, 不可直接访问, 因此通过WriteRegister来间接更新PC值
     machine->WriteRegister(PrevPCReg, machine->ReadRegister(PCReg));    // 更新PrevPC = PC
-    machine->WriteRegister(PCReg, machine->ReadRegister(PCReg) + 4);    // 更新PC = NextPC
+    machine->WriteRegister(PCReg, machine->ReadRegister(NextPCReg));    // 更新PC = NextPC
     machine->WriteRegister(NextPCReg, machine->ReadRegister(NextPCReg) + 4);    // 更新NextPC = NextPC + 4
 }
