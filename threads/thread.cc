@@ -392,12 +392,53 @@ PCB::PCB() {
     waitProcessPid = 0;
     exitCode = 0;
     space = NULL;
+    // 初始化文件表
+    for (int i = 3; i < MaxFileId; i++)
+        files[i] = NULL;
+    OpenFile *stdin = new OpenFile("stdin");
+    files[0] = stdin;
+    OpenFile *stdout = new OpenFile("stdout");
+    files[1] = stdout;
+    OpenFile *stderr = new OpenFile("stderr");
+    files[2] = stderr;
 }
 
 PCB::~PCB() {
     if (space)
         delete space;
     space = NULL;
+
+    for (int i = 0; i < 3; i++) {
+        delete files[i];
+        files[i] = NULL;
+    }   
+    
+    for (int i = 3; i < MaxFileId; i++)
+        if (files[i])
+            files[i] = NULL;
+}
+
+int 
+PCB::getFileDescriptor(OpenFile *openfile) {
+    for (int i = 3; i < MaxFileId; i++) {
+        if (!files[i]) {
+            files[i] = openfile;
+            return i;
+        }
+    }
+    ASSERT(FALSE);
+}
+
+OpenFile *
+PCB::getOpenFile(int fd) {
+    ASSERT(fd < MaxFileId);
+    return files[fd];
+}
+
+void
+PCB::releaseFileDescriptor(int fd) {
+    ASSERT(fd < MaxFileId);
+    files[fd] = NULL;
 }
 
 void

@@ -32,6 +32,10 @@ OpenFile::OpenFile(int sector)
     hdrSector = sector;
 }
 
+OpenFile::OpenFile(char *type) {
+    
+}
+
 //----------------------------------------------------------------------
 // OpenFile::~OpenFile
 // 	Close a Nachos file, de-allocating any in-memory data structures.
@@ -215,4 +219,15 @@ void
 OpenFile::WriteBack()
 {
     hdr->WriteBack(hdrSector);
+}
+
+int 
+OpenFile::WriteStdout(char *from, int numBytes) {
+    WriteFile(1, from, numBytes);
+    return numBytes;
+}
+
+int 
+OpenFile::ReadStdin(char *into, int numBytes) {
+    return ReadPartial(0, into, numBytes);
 }

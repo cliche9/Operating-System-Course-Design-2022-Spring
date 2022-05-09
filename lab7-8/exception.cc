@@ -93,16 +93,10 @@ ExceptionHandler(ExceptionType which)
                 scheduler->Print();
                 // 获得exec程序中Exec系统调用函数的参数
    	            int addr = machine->ReadRegister(4);        
-                printf("SC_Exec: Successfully read register 4\n");
                 // 由于此处参数是字符串, r4寄存器存储该字符串在内存中的地址, 因此需要访存读出
                 // char fileName[FileNameMaxLen + 1];   Nachos中的文件长度应该限制在FileNameMaxLen, 此处为了适应unix文件系统, 直接使用50作为长度
                 char *fileName = new char[64];
-                int i = 0;
-                DEBUG('x', "Exec, about to read filename\n");
-                do {
-                    // 循环读取, 一次读1字节, 直到读到结尾符'\0'
-                    machine->ReadMem(addr + i, 1, (int *)&fileName[i]);
-                } while (fileName[i++] != '\0');
+                ReadMem(addr, fileName);
                 // 从内存读取待执行的程序
                 OpenFile *executable = fileSystem->Open(fileName);
                 if (executable == NULL) {
@@ -153,6 +147,154 @@ ExceptionHandler(ExceptionType which)
                 IncrementPC();
                 break;
             }
+            case SC_Create: {
+                DEBUG('x', "Create, initiated by user program.\n");
+                printf("SC_Create: system call\n");
+                // 获取文件基址
+                int addr = machine->ReadRegister(4);
+                // 读取文件
+                char fileName[64];
+                ReadMem(addr, fileName, 64);
+#ifdef FILESYS_STUB
+                // 打开文件, 不存在则新建, 存在则清空覆盖
+                int fileDescriptor = OpenForWrite(fileName);
+                if (fileDescriptor == -1)
+                    printf("Create file %s failed.\n", fileName);
+                else
+                    printf("Create file %s succeed, the fd is %d.\n", fileName, fileDescriptor);
+                Close(fileDescriptor);
+#else
+                if (!fileSystem->Create(fileName, 0))
+                    printf("Create file %s failed.\n", fileName);
+                else
+                    printf("Create file %s succeed.\n", fileName);
+#endif
+                // machine->WriteRegister(2, fileDescriptor);
+                IncrementPC();
+                break;
+            }
+            case SC_Open: {
+                DEBUG('x', "Open, initiated by user program.\n");
+                printf("SC_Open: system call\n");
+                int addr = machine->ReadRegister(4);
+                char fileName[64];
+                ReadMem(addr, fileName, 64);
+#ifdef FILESYS_STUB
+                int fileDescriptor = OpenForReadWrite(fileName);
+                if (fileDescriptor == -1)
+                    printf("Open file %s failed.\n", fileName);
+                else
+                    printf("Opne file %s, the fd is %d.\n", fileName, fileDescriptor);
+#else
+                OpenFile *openfile = fileSystem->Open(fileName);
+                ASSERT(openfile != NULL);
+                int fd = currentThread->pcb->getFileDescriptor(openfile);
+                DEBUG('f', "File: %s open secceed! the file id is %d\n", fileName, fd);
+#endif
+                machine->WriteRegister(2, fileDescriptor);
+                IncrementPC();
+                break;
+            }
+            case SC_Write: {
+                DEBUG('x', "Write, initiated by user program.\n");
+                printf("SC_Write: system call\n");
+                int addr = machine->ReadRegister(4);
+                int size = machine->ReadRegister(5);
+                int fd = machine->ReadRegister(6);
+                // 从内存读取buffer的内容
+                char buffer[128];
+                ReadMem(addr, buffer, size);
+#ifdef FILESYS_STUB
+                // 打开fd对应文件
+                OpenFile *openfile = new OpenFile(fd);
+                ASSERT(openfile != NULL);
+                int writePosition = (fd == 1) ? 0 : openfile->Length();
+                int writtenBytes = openfile->WriteAt(buffer, size, writePosition);
+                if (writtenBytes == 0)
+                    printf("Write to file failed.\n");
+                else
+                    printf("\"%s\" has written to file %s.\n", buffer, fd);
+#else
+                OpenFile *openfile = currentThread->pcb->getOpenFile(fd);
+                ASSERT(openfile != NULL)
+                if (fd == 1 || fd == 2)
+                    openfile->WriteStdout(buffer, size); 
+                else {
+                    int writePosition = openfile->Length();
+                    openfile->Seek(writePosition);
+                    int writtenBytes = openfile->Write(buffer, size);
+                    if(writtenBytes == 0)
+                        DEBUG('f',"Write file failed!\n"); 
+                    else
+                        DEBUG('f',"\n\"%s\" has written in file %d succeed!\n", buffer, fd);
+                }
+#endif
+                machine->WriteRegister(2, size);
+                IncrementPC();
+                break;
+            }
+            case SC_Read: {
+                DEBUG('x', "Read, initiated by user program.\n");
+                printf("SC_Read: system call\n");
+                int addr = machine->ReadRegister(4);
+                int size = machine->ReadRegister(5);
+                int fd = machine->ReadRegister(6);
+#ifdef FILESYS_STUB
+                // 打开fd对应文件
+                OpenFile *openfile = new OpenFile(fd);
+                ASSERT(openfile != NULL);
+                // 从内存读取buffer的内容
+                char buffer[size];
+                int readBytes = openfile->Read(buffer, size);
+                for (int i = 0; i < size; i++)
+                    if (!machine->WriteMem(addr, 1, buffer[i]))
+                        printf("Writing Memory ErrorOccurred.\n");
+                buffer[readBytes] = '\0';
+                printf("Read succeed, contents: %s, length = %d.\n", buffer, readBytes);
+#else
+                OpenFile *openfile = currentThread->pcb->getOpenFile(fd);
+                ASSERT(openfile != NULL)
+                char buffer[size];
+                int readBytes = 0;
+                if (fd == 0) //stdin
+                    readBytes = openfile->ReadStdin(buffer, size);
+                else
+                    readBytes = openfile->Read(buffer, size);
+                for (int i = 0; i < readBytes; i++)
+                    machine->WriteMem(addr, 1, buffer[i]);
+                buffer[readBytes]='\0';
+                
+                for(int i = 0; i < readBytes; i++)
+                    if (buffer[i] >=0 && buffer[i] <= 9)
+                        buffer[i] += 0x30;
+                char *buf = buffer;
+                if (readBytes > 0)
+                    DEBUG('f',"Read file (%d) succeed! the content is \"%s\", the length is %d\n", fd, buf, readBytes);
+                else
+                    printf("\nRead file failed!\n");
+#endif
+                machine->WriteRegister(2, readBytes);
+                IncrementPC();
+                break;
+            }
+            case SC_Close: {
+                DEBUG('x', "Close, initiated by user program.\n");
+                printf("SC_Close: system call\n");
+                int fd = machine->ReadRegister(4);
+#ifdef FILESYS_STUB
+                Close(fd);
+                printf("Close succeed, fd = %d.\n", fd);
+#else
+                OpenFile* openfile = currentThread->pcb->getOpenFile(fd);
+                ASSERT(openfile != NULL);
+                openfile->WriteBack();  // write file header back to DISK
+                delete openfile;        // close file 
+                currentThread->pcb->releaseFileDescriptor(fd);
+                DEBUG('f', "File %d closed succeed.\n", fd);
+#endif
+                IncrementPC();
+                break;
+            }
             default: {
                 printf("Unexpected system call %d %d\n", which, type);
 	            ASSERT(FALSE);
@@ -189,4 +331,13 @@ IncrementPC() {
     machine->WriteRegister(PrevPCReg, machine->ReadRegister(PCReg));    // 更新PrevPC = PC
     machine->WriteRegister(PCReg, machine->ReadRegister(NextPCReg));    // 更新PC = NextPC
     machine->WriteRegister(NextPCReg, machine->ReadRegister(NextPCReg) + 4);    // 更新NextPC = NextPC + 4
+}
+
+void
+ReadMem(int addr, char *fileName, int size) {
+    int i = 0;
+    do {
+        ASSERT(i < size);
+        machine->ReadMem(addr + i, 1, (int *)&fileName[i]);
+    } while (fileName[i++] != '\0');
 }

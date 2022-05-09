@@ -3,6 +3,9 @@
         "__locale": "cpp",
         "locale": "cpp",
         "__threading_support": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "__string": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     }
 }
