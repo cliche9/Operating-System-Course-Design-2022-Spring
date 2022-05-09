@@ -76,7 +76,7 @@ extern void ThreadPrint(_int arg);
 //  that only run in the kernel have a NULL address space.
 
 #ifdef USER_PROGRAM
-#define MaxFileId 10;
+#define MaxFileId 10
 
 struct PCB {
     int userRegisters[NumTotalRegs];	// 用户态CPU寄存器状态
