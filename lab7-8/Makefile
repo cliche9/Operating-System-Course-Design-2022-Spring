@@ -18,8 +18,8 @@ endef
 # uncomment the include below
 
 include ../threads/Makefile.local
-include ../lab7-8/Makefile.local
 include ../lab5/Makefile.local
+include ../lab7-8/Makefile.local
 # include ../ass2/Makefile.local
 include ../Makefile.dep
 include ../Makefile.common
