@@ -25,7 +25,7 @@ CCFILES = main.cc\
 	stats.cc\
 	timer.cc
 
-INCPATH += -I../threads -I../lab5 -I../machine
+INCPATH += -I../threads -I../lab5 -I../machine -I../filesys
 
 # DEFINES += -DTHREADS
 # DEFINES += -DSYNCH
