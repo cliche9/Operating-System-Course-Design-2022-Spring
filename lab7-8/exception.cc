@@ -27,6 +27,7 @@
 
 void StartProcess(int pid);
 void IncrementPC();
+void ReadMem(int addr, char *fileName, int size);
 //----------------------------------------------------------------------
 // ExceptionHandler
 // 	Entry point into the Nachos kernel.  Called when a user program
@@ -157,11 +158,11 @@ ExceptionHandler(ExceptionType which)
                 ReadMem(addr, fileName, 64);
 #ifdef FILESYS_STUB
                 // 打开文件, 不存在则新建, 存在则清空覆盖
-                int fileDescriptor = OpenForWrite(fileName);
-                if (fileDescriptor == -1)
+                int fd = OpenForWrite(fileName);
+                if (fd == -1)
                     printf("Create file %s failed.\n", fileName);
                 else
-                    printf("Create file %s succeed, the fd is %d.\n", fileName, fileDescriptor);
+                    printf("Create file %s succeed, the fd is %d.\n", fileName, fd);
                 Close(fileDescriptor);
 #else
                 if (!fileSystem->Create(fileName, 0))
@@ -180,18 +181,18 @@ ExceptionHandler(ExceptionType which)
                 char fileName[64];
                 ReadMem(addr, fileName, 64);
 #ifdef FILESYS_STUB
-                int fileDescriptor = OpenForReadWrite(fileName);
-                if (fileDescriptor == -1)
+                int fd = OpenForReadWrite(fileName);
+                if (fd == -1)
                     printf("Open file %s failed.\n", fileName);
                 else
-                    printf("Opne file %s, the fd is %d.\n", fileName, fileDescriptor);
+                    printf("Opne file %s, the fd is %d.\n", fileName, fd);
 #else
                 OpenFile *openfile = fileSystem->Open(fileName);
                 ASSERT(openfile != NULL);
                 int fd = currentThread->pcb->getFileDescriptor(openfile);
                 DEBUG('f', "File: %s open secceed! the file id is %d\n", fileName, fd);
 #endif
-                machine->WriteRegister(2, fileDescriptor);
+                machine->WriteRegister(2, fd);
                 IncrementPC();
                 break;
             }
