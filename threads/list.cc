@@ -266,7 +266,7 @@ List::SortedRemove(int *keyPtr)
     }
     if (keyPtr != NULL)
         *keyPtr = element->key;
-    DEBUG('l', "SortedRemove: on delete thread %d\n", element->item);
+    DEBUG('t', "SortedRemove: on delete thread %d\n", element->item);
     delete element;
     return thing;
 }
