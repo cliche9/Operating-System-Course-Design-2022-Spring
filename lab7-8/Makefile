@@ -17,9 +17,9 @@ endef
 # If the filesystem assignment is done before userprog, then
 # uncomment the include below
 
-include ../lab5/Makefile.local
 include ../threads/Makefile.local
 include ../lab7-8/Makefile.local
+include ../lab5/Makefile.local
 # include ../ass2/Makefile.local
 include ../Makefile.dep
 include ../Makefile.common
