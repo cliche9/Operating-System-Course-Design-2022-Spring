@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "syscall.h": "c",
+        "copyright.h": "c",
+        "filesys.h": "c"
+    }
+}
