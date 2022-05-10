@@ -29,6 +29,11 @@ OpenFile::OpenFile(int sector)
     hdr = new FileHeader;
     hdr->FetchFrom(sector);
     seekPosition = 0;
+    hdrSector = sector;
+}
+
+OpenFile::OpenFile(char *type) {
+    
 }
 
 //----------------------------------------------------------------------
@@ -148,10 +153,21 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
     bool firstAligned, lastAligned;
     char *buf;
 
-    if ((numBytes <= 0) || (position >= fileLength))
-	return 0;				// check request
-    if ((position + numBytes) > fileLength)
-	numBytes = fileLength - position;
+    if ((numBytes <= 0) || (position > fileLength))
+	    return -1;				// check request
+    
+    if ((position + numBytes) > fileLength) {
+        // appending this file
+        int incrementBytes = position + numBytes - fileLength;
+        BitMap *bitMap = fileSystem->getBitMap();
+        // allocate more space for current file
+        printf("Start allocating %d bytes to file of length %d\n", incrementBytes, fileLength);
+        bool hdrRet = hdr->Allocate(bitMap, fileLength, incrementBytes);
+        if (!hdrRet)
+            return -1;
+        fileSystem->setBitMap(bitMap);      // write back the bit map
+    }	
+
     DEBUG('f', "Writing %d bytes at %d, from file of length %d.\n", 	
 			numBytes, position, fileLength);
 
@@ -180,6 +196,7 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
 					&buf[(i - firstSector) * SectorSize]);
     delete [] buf;
     return numBytes;
+    printf("synchDisk write complete, numBytes: %d\n", numBytes);
 }
 
 //----------------------------------------------------------------------
@@ -191,4 +208,26 @@ int
 OpenFile::Length() 
 { 
     return hdr->FileLength(); 
+}
+
+//----------------------------------------------------------------------
+// OpenFile::WriteBack
+// 	Write the FileHeader(inode) back to the DISK cuz we changed it
+//  Only called when we expand the file size: file needs more sectors
+//----------------------------------------------------------------------
+void
+OpenFile::WriteBack()
+{
+    hdr->WriteBack(hdrSector);
+}
+
+int 
+OpenFile::WriteStdout(char *from, int numBytes) {
+    WriteFile(1, from, numBytes);
+    return numBytes;
+}
+
+int 
+OpenFile::ReadStdin(char *into, int numBytes) {
+    return ReadPartial(0, into, numBytes);
 }

@@ -65,7 +65,8 @@ class OpenFile {
   public:
     OpenFile(int sector);		// Open a file whose header is located
 					// at "sector" on the disk
-    ~OpenFile();			// Close the file
+    OpenFile(char *type);
+	~OpenFile();			// Close the file
 
     void Seek(int position); 		// Set the position from which to 
 					// start reading/writing -- UNIX lseek
@@ -85,7 +86,10 @@ class OpenFile {
 					// file (this interface is simpler 
 					// than the UNIX idiom -- lseek to 
 					// end of file, tell, lseek back 
-    
+	void WriteBack();		// Write FileHeader back to the DISK cuz we changed it;
+	int WriteStdout(char *from, int numBytes);
+	int ReadStdin(char *into, int numBytes);
+
   private:
     FileHeader *hdr;			// Header for this file 
     int seekPosition;			// Current position within the file

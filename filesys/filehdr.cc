@@ -27,6 +27,13 @@
 #include "system.h"
 #include "filehdr.h"
 
+FileHeader::FileHeader() {
+    this->numBytes = 0;
+    this->numSectors = 0;
+    for (int i = 0; i < NumDirect; i++)
+        this->dataSectors[i] = 0;
+}
+
 //----------------------------------------------------------------------
 // FileHeader::Allocate
 // 	Initialize a fresh file header for a newly created file.
@@ -49,6 +56,52 @@ FileHeader::Allocate(BitMap *freeMap, int fileSize)
     for (int i = 0; i < numSectors; i++)
 	dataSectors[i] = freeMap->Find();
     return TRUE;
+}
+
+//----------------------------------------------------------------------
+// FileHeader::Allocate ---- overload for appending
+//  Expand file size for appending
+//	Return FALSE if appending procedure failed
+//
+//	"freeMap" is the bit map of free disk sectors
+//	"fileSize" is the bit map of free disk sectors
+//  "incrementBytes" is the number of appending bytes
+//----------------------------------------------------------------------
+bool
+FileHeader::Allocate(BitMap *freeMap, int fileSize, int incrementBytes) {
+    if (numSectors > 30)        // 单一文件最多30扇区
+        return false;
+    // 空文件追加内容，为其分配扇区
+    if ((fileSize == 0) && (incrementBytes > 0)) {
+        if (freeMap->NumClear() < 1)
+            return false;
+        dataSectors[0] = freeMap->Find();
+        numSectors = 1;
+        numBytes = 0;
+    }
+    numBytes = fileSize;
+    int lastFreeBytes = numSectors * SectorSize - numBytes; // 当前文件末尾扇区剩余空闲大小
+    int newSectorBytes = incrementBytes - lastFreeBytes;    // 追加内容填满末尾扇区后，还需要newSectorBytes大小
+    // 不需要分配新扇区
+    if (newSectorBytes <= 0) {
+        numBytes += incrementBytes;         // 更新文件大小
+        return true;
+    }
+    // 需要分配新扇区
+    int moreSectors = divRoundUp(newSectorBytes, SectorSize);
+    // 分配新扇区后，该文件扇区数 > 30
+    if (numSectors + moreSectors > 30)      
+        return false;
+    // 空闲扇区不足
+    if (freeMap->NumClear() < moreSectors)
+        return false;
+    // 正式分配扇区
+    for (int i = numSectors; i < numSectors + moreSectors; i++)
+        dataSectors[i] = freeMap->Find();
+    // 更新文件大小、所占扇区
+    numBytes += incrementBytes;
+    numSectors += moreSectors;
+    return true;
 }
 
 //----------------------------------------------------------------------
