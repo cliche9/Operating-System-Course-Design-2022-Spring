@@ -125,7 +125,7 @@ class Thread {
     // some of the private data for this class is listed above
     int* stack; 	 		          // 栈底指针, 主线程栈底指针为NULL 
     ThreadStatus status;		    // 线程状态：ready, running, blocked or terminated
-    char* name;                 // 线程debug名称
+    char name[64];              // 线程debug名称
 
     void StackAllocate(VoidFunctionPtr func, _int arg);   // Fork内部调用, 分配线程的栈空间
 

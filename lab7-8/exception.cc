@@ -96,7 +96,7 @@ ExceptionHandler(ExceptionType which)
    	            int addr = machine->ReadRegister(4);        
                 // 由于此处参数是字符串, r4寄存器存储该字符串在内存中的地址, 因此需要访存读出
                 // char fileName[FileNameMaxLen + 1];   Nachos中的文件长度应该限制在FileNameMaxLen, 此处为了适应unix文件系统, 直接使用50作为长度
-                char *fileName = new char[64];
+                char fileName[64];
                 ReadMem(addr, fileName, 64);
                 // 从内存读取待执行的程序
                 if (strcmp(fileName, "ls") == 0) {

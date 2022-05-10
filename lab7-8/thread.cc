@@ -34,7 +34,7 @@
 
 Thread::Thread(char* threadName) {
     DEBUG('t', "Initing thread \"%s\"\n", threadName);
-    name = threadName;
+    strcpy(name, threadName);
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
