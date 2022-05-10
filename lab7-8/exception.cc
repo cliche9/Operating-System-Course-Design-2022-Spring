@@ -183,7 +183,7 @@ ExceptionHandler(ExceptionType which)
                 char fileName[64];
                 ReadMem(addr, fileName, 64);
 #ifdef FILESYS_STUB
-                int fd = OpenForReadWrite(fileName);
+                int fd = OpenForReadWrite(fileName, true);
                 if (fd == -1)
                     printf("Open file %s failed.\n", fileName);
                 else
