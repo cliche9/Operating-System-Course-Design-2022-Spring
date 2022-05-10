@@ -43,7 +43,7 @@ class ListElement {
 
 class List {
   public:
-    List();			// initialize the list
+    List(char *name = NULL);			// initialize the list
     ~List();			// de-allocate the list
 
     void Prepend(void *item); 	// Put item at the beginning of the list
@@ -63,6 +63,7 @@ class List {
   private:
     ListElement *first;  	// Head of the list, NULL if list is empty
     ListElement *last;		// Last element of list
+    char *debugName;
 };
 
 #endif // LIST_H

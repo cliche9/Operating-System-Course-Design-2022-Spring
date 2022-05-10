@@ -40,9 +40,10 @@ ListElement::ListElement(void *itemPtr, int sortKey)
 //	Elements can now be added to the list.
 //----------------------------------------------------------------------
 
-List::List()
+List::List(char *name)
 { 
     first = last = NULL; 
+    debugName = name;
 }
 
 //----------------------------------------------------------------------
@@ -57,7 +58,7 @@ List::List()
 
 List::~List()
 { 
-    DEBUG('l', "~List\n");
+    DEBUG('l', "%s: ~List\n", debugName);
     while (Remove() != NULL)
 	;	 // delete all the list elements
 }
@@ -78,7 +79,7 @@ void
 List::Append(void *item)
 {
     ListElement *element = new ListElement(item, 0);
-    DEBUG('l', "Append: on append thread %d\n", item);
+    DEBUG('l', "%s Append: on append thread %d\n", debugName, item);
 
     if (IsEmpty()) {		// list is empty
 	first = element;
@@ -105,7 +106,7 @@ void
 List::Prepend(void *item)
 {
     ListElement *element = new ListElement(item, 0);
-    DEBUG('l', "Prepend: on prepend %d\n", item);
+    DEBUG('l', "%s Prepend: on prepend %d\n", debugName, item);
 
     if (IsEmpty()) {		// list is empty
 	first = element;
@@ -155,7 +156,7 @@ List::RemoveByItem(void *item) {
             } else
                 prev->next = cur->next;
         }
-        DEBUG('t', "RemoveByItem: on remove thread %d\n", item);
+        DEBUG('t', "%s RemoveByItem: on remove thread %d\n", debugName, item);
         delete cur;
     }
 }
@@ -212,7 +213,7 @@ void
 List::SortedInsert(void *item, int sortKey)
 {
     ListElement *element = new ListElement(item, sortKey);
-    DEBUG('l', "SortedInsert: on insert thread %d\n", item);
+    DEBUG('l', "%s SortedInsert: on insert thread %d\n", debugName, item);
     ListElement *ptr;		// keep track
 
     if (IsEmpty()) {	// if list is empty, put
@@ -266,7 +267,7 @@ List::SortedRemove(int *keyPtr)
     }
     if (keyPtr != NULL)
         *keyPtr = element->key;
-    DEBUG('t', "SortedRemove: on delete thread %d\n", element->item);
+    DEBUG('l', "%s SortedRemove: on delete thread %d\n", debugName, element->item);
     delete element;
     return thing;
 }
