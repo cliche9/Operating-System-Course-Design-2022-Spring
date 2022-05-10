@@ -33,6 +33,7 @@
 //----------------------------------------------------------------------
 
 Thread::Thread(char* threadName) {
+    DEBUG('t', "Initing thread \"%s\"\n", threadName);
     name = threadName;
     stackTop = NULL;
     stack = NULL;
