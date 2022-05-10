@@ -29,7 +29,7 @@
 
 Scheduler::Scheduler()
 { 
-    readyList = new List;
+    readyList = new List("Ready");
 } 
 
 //----------------------------------------------------------------------
