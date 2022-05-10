@@ -192,7 +192,7 @@ ExceptionHandler(ExceptionType which)
                 OpenFile *openfile = fileSystem->Open(fileName);
                 ASSERT(openfile != NULL);
                 int fd = currentThread->pcb->getFileDescriptor(openfile);
-                DEBUG('f', "File: %s open secceed! the file id is %d\n", fileName, fd);
+                printf("File: %s open secceed! the file id is %d\n", fileName, fd);
 #endif
                 machine->WriteRegister(2, fd);
                 IncrementPC();
@@ -228,9 +228,9 @@ ExceptionHandler(ExceptionType which)
                     openfile->Seek(writePosition);
                     int writtenBytes = openfile->Write(buffer, size);
                     if(writtenBytes == 0)
-                        DEBUG('f',"Write file failed!\n"); 
+                        printf("Write file failed!\n"); 
                     else
-                        DEBUG('f',"\n\"%s\" has written in file %d succeed!\n", buffer, fd);
+                        printf("\"%s\" has written in file %d succeed!\n", buffer, fd);
                 }
 #endif
                 machine->WriteRegister(2, size);
@@ -274,9 +274,9 @@ ExceptionHandler(ExceptionType which)
                         buffer[i] += 0x30;
                 char *buf = buffer;
                 if (readBytes > 0)
-                    DEBUG('f',"Read file (%d) succeed! the content is \"%s\", the length is %d\n", fd, buf, readBytes);
+                    printf("Read file (%d) succeed! the content is \"%s\", the length is %d\n", fd, buf, readBytes);
                 else
-                    printf("\nRead file failed!\n");
+                    printf("Read file failed!\n");
 #endif
                 machine->WriteRegister(2, readBytes);
                 IncrementPC();
@@ -296,7 +296,7 @@ ExceptionHandler(ExceptionType which)
                 openfile->WriteBack();  // write file header back to DISK
                 delete openfile;        // close file 
                 currentThread->pcb->releaseFileDescriptor(fd);
-                DEBUG('f', "File %d closed succeed.\n", fd);
+                printf("File %d closed succeed.\n", fd);
 #endif
                 IncrementPC();
                 break;
