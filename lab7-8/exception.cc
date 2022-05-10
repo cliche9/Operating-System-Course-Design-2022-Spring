@@ -341,8 +341,9 @@ IncrementPC() {
 
 void
 ReadMem(int addr, char *buffer, int size) {
-    int i = 0;
-    do {
+    for (int i = 0; i < size; i++) {
         machine->ReadMem(addr + i, 1, (int *)&buffer[i]);
-    } while (buffer[i] != '\0' && i++ < size);
+        if (buffer[i] == '\0')
+            break;
+    }
 }
