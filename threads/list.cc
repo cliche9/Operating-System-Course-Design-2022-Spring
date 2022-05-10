@@ -155,7 +155,7 @@ List::RemoveByItem(void *item) {
             } else
                 prev->next = cur->next;
         }
-        DEBUG('l', "RemoveByItem: on remove thread %d\n", item);
+        DEBUG('t', "RemoveByItem: on remove thread %d\n", item);
         delete cur;
     }
 }
