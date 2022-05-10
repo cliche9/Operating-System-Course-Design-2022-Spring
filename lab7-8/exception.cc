@@ -153,6 +153,7 @@ ExceptionHandler(ExceptionType which)
                 printf("SC_Create: system call\n");
                 // 获取文件基址
                 int addr = machine->ReadRegister(4);
+                printf("Addr: %d\n", addr);
                 // 读取文件
                 char fileName[64];
                 ReadMem(addr, fileName, 64);
@@ -178,6 +179,7 @@ ExceptionHandler(ExceptionType which)
                 DEBUG('x', "Open, initiated by user program.\n");
                 printf("SC_Open: system call\n");
                 int addr = machine->ReadRegister(4);
+                printf("Addr: %d\n", addr);
                 char fileName[64];
                 ReadMem(addr, fileName, 64);
 #ifdef FILESYS_STUB
@@ -202,6 +204,7 @@ ExceptionHandler(ExceptionType which)
                 int addr = machine->ReadRegister(4);
                 int size = machine->ReadRegister(5);
                 int fd = machine->ReadRegister(6);
+                printf("Addr: %d, length: %d, fd: %d\n", addr, size, fd);
                 // 从内存读取buffer的内容
                 char buffer[128];
                 ReadMem(addr, buffer, size);
@@ -240,6 +243,7 @@ ExceptionHandler(ExceptionType which)
                 int addr = machine->ReadRegister(4);
                 int size = machine->ReadRegister(5);
                 int fd = machine->ReadRegister(6);
+                printf("Addr: %d, length: %d, fd: %d\n", addr, size, fd);
 #ifdef FILESYS_STUB
                 // 打开fd对应文件
                 OpenFile *openfile = new OpenFile(fd);
@@ -282,6 +286,7 @@ ExceptionHandler(ExceptionType which)
                 DEBUG('x', "Close, initiated by user program.\n");
                 printf("SC_Close: system call\n");
                 int fd = machine->ReadRegister(4);
+                printf("fd: %d\n", fd);
 #ifdef FILESYS_STUB
                 Close(fd);
                 printf("Close succeed, fd = %d.\n", fd);
