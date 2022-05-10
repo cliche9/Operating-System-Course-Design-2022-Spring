@@ -335,10 +335,9 @@ IncrementPC() {
 }
 
 void
-ReadMem(int addr, char *fileName, int size) {
+ReadMem(int addr, char *buffer, int size) {
     int i = 0;
     do {
-        ASSERT(i < size);
-        machine->ReadMem(addr + i, 1, (int *)&fileName[i]);
-    } while (fileName[i++] != '\0');
+        machine->ReadMem(addr + i, 1, (int *)&buffer[i]);
+    } while (buffer[i] != '\0' && i++ < size);
 }
