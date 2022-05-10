@@ -23,7 +23,7 @@
 using std::vector;
 using std::string;
 
-#define FileNameMaxLen 		9	// for simplicity, we assume 
+#define FileNameMaxLen 		19	// for simplicity, we assume 
 					// file names are <= 9 characters long
 
 // The following class defines a "directory entry", representing a file
