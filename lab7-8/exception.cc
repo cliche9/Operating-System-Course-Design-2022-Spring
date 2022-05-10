@@ -217,7 +217,7 @@ ExceptionHandler(ExceptionType which)
                 if (writtenBytes == 0)
                     printf("Write to file failed.\n");
                 else
-                    printf("\"%s\" has written to file %s.\n", buffer, fd);
+                    printf("\"%s\" has written to file %d.\n", buffer, fd);
 #else
                 OpenFile *openfile = currentThread->pcb->getOpenFile(fd);
                 ASSERT(openfile != NULL)
