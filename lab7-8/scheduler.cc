@@ -111,7 +111,8 @@ Scheduler::Run (Thread *nextThread)
     
 #ifdef USER_PROGRAM			// ignore until running user programs 
     if (currentThread->pcb->space != NULL) {	// if this thread is a user program,
-        machine->DumpState();
+        if (DebugIsEnabled('t'))
+            machine->DumpState();
         currentThread->pcb->SaveUserState(); // save the user's CPU registers
 	    currentThread->pcb->space->SaveState();
         DEBUG('t', "Save user program state.\n");
@@ -155,8 +156,10 @@ Scheduler::Run (Thread *nextThread)
     if (currentThread->pcb->space != NULL) {		// if there is an address space
         currentThread->pcb->RestoreUserState();     // to restore, do it.
 	    currentThread->pcb->space->RestoreState();
-        currentThread->pcb->space->Print();
-        machine->DumpState();
+        if (DebugIsEnabled('t')) {
+            currentThread->pcb->space->Print();
+            machine->DumpState();
+        }
         DEBUG('t', "Restore user program state.\n");
     }
     Print();
