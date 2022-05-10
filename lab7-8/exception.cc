@@ -101,8 +101,8 @@ ExceptionHandler(ExceptionType which)
                 // 从内存读取待执行的程序
                 if (strcmp(fileName, "ls") == 0) {
                     DEBUG('x', "thread:%s\tFile(s) on Nachos DISK:\n", currentThread->getName());
-                    fileSystem->Print();
-                    machine->WriteRegister(2, 0);
+                    fileSystem->List();
+                    machine->WriteRegister(2, 127);
                     IncrementPC();
                     break;
                 }
