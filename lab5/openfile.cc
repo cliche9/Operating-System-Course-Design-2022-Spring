@@ -76,8 +76,12 @@ OpenFile::Seek(int position)
 int
 OpenFile::Read(char *into, int numBytes)
 {
+#ifdef FILESYS
+   int result = ReadAt(into, numBytes, 0);
+#else
    int result = ReadAt(into, numBytes, seekPosition);
    seekPosition += result;
+#endif
    return result;
 }
 
