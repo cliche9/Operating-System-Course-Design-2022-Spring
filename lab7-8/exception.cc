@@ -67,7 +67,7 @@ ExceptionHandler(ExceptionType which)
             case SC_Exit: {
                 DEBUG('x', "Exit, initiated by user program.\n");
                 printf("SC_Exit: system call\n");
-                scheduler->Print();
+                // scheduler->Print();
                 // 读取Exit的退出码
                 int exitCode = machine->ReadRegister(4);    
                 printf("SC_Exit: Exit Status = %d\n", exitCode);
@@ -84,14 +84,14 @@ ExceptionHandler(ExceptionType which)
                 // 释放该线程的地址空间和pid
                 currentThread->Finish();
                 printf("SC_Exit complete.\n");
-                scheduler->Print();
+                // scheduler->Print();
                 IncrementPC();
                 break;
             }
             case SC_Exec: {
                 DEBUG('x', "Exec, initiated by user program.\n");
                 printf("SC_Exec: system call\n");
-                scheduler->Print();
+                // scheduler->Print();
                 // 获得exec程序中Exec系统调用函数的参数
    	            int addr = machine->ReadRegister(4);        
                 // 由于此处参数是字符串, r4寄存器存储该字符串在内存中的地址, 因此需要访存读出
@@ -124,19 +124,19 @@ ExceptionHandler(ExceptionType which)
                 // Exec有返回值, 返回线程号, 返回值存在r2寄存器中
                 machine->WriteRegister(2, space->getPid());
                 // 系统调用返回后直接return, 因此需要在ExceptionHandler中增加PC
-                scheduler->Print();
+                // scheduler->Print();
                 IncrementPC();
                 break;
             }
             case SC_Join: {
                 DEBUG('x', "Join, initiated by user program.\n");
                 printf("SC_Join: system call\n");
-                scheduler->Print();
+                // scheduler->Print();
                 int pid = machine->ReadRegister(4);     // 读取pid
                 currentThread->Join(pid);               // 执行join
                 // 返回pid线程的返回码waitProcessExitCode
                 printf("SC_Join: Exit Status = %d\n", currentThread->pcb->waitProcessExitCode);
-                scheduler->Print();
+                // scheduler->Print();
                 machine->WriteRegister(2, currentThread->pcb->waitProcessExitCode);
                 IncrementPC();
                 break;
