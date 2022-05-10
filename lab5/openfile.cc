@@ -33,7 +33,7 @@ OpenFile::OpenFile(int sector)
 }
 
 OpenFile::OpenFile(char *type) {
-    
+    hdr = NULL;
 }
 
 //----------------------------------------------------------------------
@@ -43,7 +43,8 @@ OpenFile::OpenFile(char *type) {
 
 OpenFile::~OpenFile()
 {
-    delete hdr;
+    if (hdr)
+        delete hdr;
 }
 
 //----------------------------------------------------------------------

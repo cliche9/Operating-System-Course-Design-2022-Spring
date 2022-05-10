@@ -33,7 +33,7 @@ OpenFile::OpenFile(int sector)
 }
 
 OpenFile::OpenFile(char *type) {
-
+    hdr = NULL;
 }
 
 //----------------------------------------------------------------------
