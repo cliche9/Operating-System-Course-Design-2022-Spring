@@ -195,6 +195,7 @@ Scheduler::removeFromTerminatedList(int pid) {
         if(thread->getPid() == pid){
             terminatedList->RemoveByItem(cur->item);
             delete thread;
+            thread = NULL;
             break;
         }
         cur = cur->next;
