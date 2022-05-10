@@ -24,4 +24,6 @@ include ../lab5/Makefile.local
 include ../Makefile.dep
 include ../Makefile.common
 
+DEFINES := $(DEFINES:FILESYS=FILESYS_STUB)
+
 endif # MAKEFILE_USERPROG
