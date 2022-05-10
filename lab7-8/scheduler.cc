@@ -162,7 +162,7 @@ Scheduler::Run (Thread *nextThread)
         }
         DEBUG('t', "Restore user program state.\n");
     }
-    Print();
+    // Print();
 #endif
 }
 
