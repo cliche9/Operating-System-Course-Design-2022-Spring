@@ -33,7 +33,7 @@ OpenFile::OpenFile(int sector)
 }
 
 OpenFile::OpenFile(char *type) {
-    
+
 }
 
 //----------------------------------------------------------------------
@@ -41,9 +41,9 @@ OpenFile::OpenFile(char *type) {
 // 	Close a Nachos file, de-allocating any in-memory data structures.
 //----------------------------------------------------------------------
 
-OpenFile::~OpenFile()
-{
-    delete hdr;
+OpenFile::~OpenFile() {
+    if (hdr)
+        delete hdr;
 }
 
 //----------------------------------------------------------------------
