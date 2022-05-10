@@ -29,10 +29,10 @@
 
 Scheduler::Scheduler()
 { 
-    readyList = new List; 
+    readyList = new List("Ready"); 
 #ifdef USER_PROGRAM
-    terminatedList = new List;
-    waitingList = new List;
+    terminatedList = new List("Terminated");
+    waitingList = new List("Waiting");
 #endif
 } 
 
