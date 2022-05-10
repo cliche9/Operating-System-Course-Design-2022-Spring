@@ -5,8 +5,8 @@ endef
 
 # Add new sourcefiles here.
 
-CCFILES +=bitmap.cc\
-        directory.cc\
+CCFILES += bitmap.cc\
+    directory.cc\
 	filehdr.cc\
 	filesys.cc\
 	fstest.cc\
@@ -17,7 +17,7 @@ CCFILES +=bitmap.cc\
 ifdef MAKEFILE_USERPROG_LOCAL
 DEFINES := $(DEFINES:FILESYS_STUB=FILESYS)
 else
-INCPATH += -I../lab5
+INCPATH += -I../userprog -I../lab5
 DEFINES += -DFILESYS_NEEDED -DFILESYS
 endif
 
