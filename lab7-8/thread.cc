@@ -60,8 +60,6 @@ Thread::~Thread() {
     ASSERT(this != currentThread);
     if (stack != NULL)
 		DeallocBoundedArray((char *) stack, StackSize * sizeof(_int));
-    if (name)
-        delete name;
 #ifdef USER_PROGRAM
     if (pcb)
         delete pcb;
