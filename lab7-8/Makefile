@@ -19,11 +19,9 @@ endef
 
 include ../threads/Makefile.local
 include ../lab7-8/Makefile.local
-include ../lab5/Makefile.local
+# include ../lab5/Makefile.local
 # include ../ass2/Makefile.local
 include ../Makefile.dep
 include ../Makefile.common
-
-DEFINES := $(DEFINES:FILESYS=FILESYS_STUB)
 
 endif # MAKEFILE_USERPROG
