@@ -164,7 +164,7 @@ ExceptionHandler(ExceptionType which)
                     printf("Create file %s failed.\n", fileName);
                 else
                     printf("Create file %s succeed, the fd is %d.\n", fileName, fd);
-                Close(fileDescriptor);
+                Close(fd);
 #else
                 if (!fileSystem->Create(fileName, 0))
                     printf("Create file %s failed.\n", fileName);
