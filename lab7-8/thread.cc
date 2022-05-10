@@ -393,6 +393,7 @@ PCB::PCB() {
     exitCode = 0;
     space = NULL;
     // 初始化文件表
+#ifdef FILESYS
     for (int i = 3; i < MaxFileId; i++)
         files[i] = NULL;
     OpenFile *stdin = new OpenFile("stdin");
@@ -401,6 +402,7 @@ PCB::PCB() {
     files[1] = stdout;
     OpenFile *stderr = new OpenFile("stderr");
     files[2] = stderr;
+#endif
 }
 
 PCB::~PCB() {
@@ -408,6 +410,7 @@ PCB::~PCB() {
         delete space;
     space = NULL;
 
+#ifdef FILESYS
     for (int i = 0; i < 3; i++) {
         delete files[i];
         files[i] = NULL;
@@ -416,7 +419,10 @@ PCB::~PCB() {
     for (int i = 3; i < MaxFileId; i++)
         if (files[i])
             files[i] = NULL;
+#endif
 }
+
+#ifdef FILESYS
 
 int 
 PCB::getFileDescriptor(OpenFile *openfile) {
@@ -440,6 +446,7 @@ PCB::releaseFileDescriptor(int fd) {
     ASSERT(fd < MaxFileId);
     files[fd] = NULL;
 }
+#endif
 
 void
 PCB::SaveUserState() {

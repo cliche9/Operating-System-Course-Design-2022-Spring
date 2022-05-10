@@ -85,15 +85,17 @@ struct PCB {
     int waitProcessPid;               // 当前thread等待线程的pid
     int exitCode;                     // 当前thread的exitCode
     AddrSpace *space;			            // 用户线程的地址空间
-    OpenFile *files[MaxFileId];       // 打开文件
-    
+
     PCB();                            // 构造函数
     ~PCB();                           // 析构函数
     void SaveUserState();		          // 保存用户寄存器内容
     void RestoreUserState();		      // 恢复用户寄存器
+#ifdef FILESYS
+    OpenFile *files[MaxFileId];       // 打开文件
     int getFileDescriptor(OpenFile *openfile);    // 获取openfile的fd
     OpenFile *getOpenFile(int fd);    // 获取fd的OpenFile *
     void releaseFileDescriptor(int fd);           // 释放fd
+#endif
 };
 #endif
 
