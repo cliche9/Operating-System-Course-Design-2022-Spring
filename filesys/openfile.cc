@@ -81,6 +81,7 @@ OpenFile::Read(char *into, int numBytes)
    return result;
 }
 
+int 
 OpenFile::ReadFromStart(char *into, int numBytes) {
    int result = ReadAt(into, numBytes, 0);
    return result;
