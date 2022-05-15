@@ -271,7 +271,7 @@ ExceptionHandler(ExceptionType which)
                 if (fd == 0) //stdin
                     readBytes = openfile->ReadStdin(buffer, size);
                 else
-                    readBytes = openfile->Read(buffer, size);
+                    readBytes = openfile->ReadFromStart(buffer, size);
                 for (int i = 0; i < readBytes; i++)
                     machine->WriteMem(addr, 1, buffer[i]);
                 buffer[readBytes]='\0';

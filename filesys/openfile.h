@@ -75,6 +75,9 @@ class OpenFile {
 					// starting at the implicit position.
 					// Return the # actually read/written,
 					// and increment position in file.
+#ifdef FILESYS
+	int ReadFromStart(char *into, int numBytes);
+#endif
     int Write(char *from, int numBytes);
 
     int ReadAt(char *into, int numBytes, int position);
