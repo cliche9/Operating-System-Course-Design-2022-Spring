@@ -83,6 +83,12 @@ OpenFile::Read(char *into, int numBytes)
 }
 
 int
+OpenFile::ReadFromStart(char *into, int numBytes) {
+   int result = ReadAt(into, numBytes, 0);
+   return result;
+}
+
+int
 OpenFile::Write(char *into, int numBytes)
 {
    int result = WriteAt(into, numBytes, seekPosition);
