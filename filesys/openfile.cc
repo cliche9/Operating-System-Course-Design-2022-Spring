@@ -81,13 +81,10 @@ OpenFile::Read(char *into, int numBytes)
    return result;
 }
 
-#ifdef FILESYS
-int 
 OpenFile::ReadFromStart(char *into, int numBytes) {
    int result = ReadAt(into, numBytes, 0);
    return result;
 }
-#endif
 
 int
 OpenFile::Write(char *into, int numBytes)
