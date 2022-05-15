@@ -99,6 +99,7 @@ ExceptionHandler(ExceptionType which)
                 char fileName[64];
                 ReadMem(addr, fileName, 64);
                 // 从内存读取待执行的程序
+                /**
                 if (strcmp(fileName, "ls") == 0) {
                     DEBUG('x', "thread:%s\tFile(s) on Nachos DISK:\n", currentThread->getName());
                     fileSystem->List();
@@ -106,6 +107,7 @@ ExceptionHandler(ExceptionType which)
                     IncrementPC();
                     break;
                 }
+                */
                 OpenFile *executable = fileSystem->Open(fileName);
                 if (executable == NULL) {
                     printf("Unable to open file %s\n", fileName);
