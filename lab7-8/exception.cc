@@ -265,7 +265,7 @@ ExceptionHandler(ExceptionType which)
                 printf("Read succeed, contents: %s, length = %d.\n", buffer, readBytes);
 #else
                 OpenFile *openfile = currentThread->pcb->getOpenFile(fd);
-                ASSERT(openfile != NULL)
+                ASSERT(openfile != NULL);
                 char buffer[size];
                 int readBytes = 0;
                 if (fd == 0) //stdin
